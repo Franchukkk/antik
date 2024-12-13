@@ -1,0 +1,332 @@
+@import 'components/mixins'
+
+    
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+
+html
+    font-size: 3px
+    +media(510)
+        font-size: 4px
+
+body
+    font-family: Inter
+    padding-top: 40px
+    background: linear-gradient(to bottom, #EBEBEB, #858585)
+
+ul
+    margin: 0
+
+a
+    display: inline-block
+    text-decoration: none
+
+li
+    list-style: none
+
+.wrapper
+    max-width: 300rem
+    margin: auto
+    padding: 0 2.5rem
+
+.header-line
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 10
+    width: 100%
+    background-color: #F4D469
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25)
+
+
+.header-line ul li a
+    color: #000
+    font-size: 5rem
+    font-style: italic
+    font-weight: 100
+    line-height: normal
+    padding: 4rem 11rem
+    text-transform: uppercase
+    background: linear-gradient(180deg, #F4D469 0%, #F4D469 80%,  #A7825D 100%)
+    background-size: 100% 500%
+    background-position: 0
+    transition: all .3s ease
+    &:hover
+        background-position-y: 100%
+.header-underline 
+    column-gap: 10rem
+    row-gap: 6rem
+    flex-wrap: wrap-reverse
+    padding-top: 15rem
+
+.search
+    width: 70rem
+    min-height: 40px
+
+.cart
+    transition: all .3s ease
+    &:hover
+        transform: scale(1.1)
+
+.button
+    color: #000
+    font-size: 6rem
+    font-style: italic
+    font-weight: 100
+    line-height: normal
+    padding: 4rem 11rem
+    text-transform: uppercase
+    background: linear-gradient(180deg, #F4D469 0%, #F4D469 80%,  #A7825D 100%)
+    background-size: 100% 500%
+    background-position: 0
+    border-radius: 11rem
+    transition: all .3s ease
+    outline: none
+    border: none
+    &:hover
+        background-position-y: 100%
+
+.header-underline 
+    justify-content: center
+    background-image: url("../img/header-bg.webp")
+    background-position: center
+    background-size: cover
+    padding: 50px
+    border-radius: 0px 0px 15px 15px
+    margin-bottom: 4rem
+    +media(991)
+        justify-content: space-between
+        padding: 50px 110px
+
+.search
+    color: rgba(0, 0, 0, 0.70)
+    font-size: 4rem
+    font-style: italic
+    font-weight: 100
+    border-radius: 0 0 0 23px
+    padding: 3rem 10rem
+    border: none
+    outline: none
+    & + button
+        color: #000
+        font-size: 4rem
+        padding: 0 5rem
+        font-style: italic
+        font-weight: 100
+        border-radius: 0px 23px 0 0
+        border: none
+        outline: none
+
+.products
+    margin-bottom: 3rem
+
+.products figure
+    position: relative
+    max-width: 72.5rem
+    overflow: hidden
+    &::before
+        content: ''
+        position: absolute
+        top: -10rem
+        right: 4rem
+        width: 5.5rem
+        height: 5.5rem
+        border-radius: 50%
+        background: linear-gradient(180deg, #F4D469 0%, #A7825D 100%)
+        z-index: 3
+        transition: all .3s ease
+
+    
+    &:hover::before
+        top: 2.5rem
+
+
+.figure-image
+    position: relative
+
+
+.figure-to-card-page
+    position: absolute
+    width: 100%
+    height: 100%
+    z-index: 1
+    left: 0
+    top: 0
+
+.description-card 
+    padding: 0 5px
+
+.products figcaption > .figure-image img
+    height: 70rem
+    width: 100%
+    object-fit: cover
+    border-radius: 15px 0px 0px 0px
+
+.card-text-block
+    background-color: #fff
+
+    p
+        display: flex
+        align-items: center
+        color: #000
+        font-size: 5rem
+        font-style: italic
+        font-weight: 300
+        &:first-child
+            min-height: 90px
+
+p.price
+    color: #F83A3A
+    font-weight: 600
+
+.card-btn
+    padding: 0 5rem
+    border-radius: 15px 0px 0px 0px
+    background: #F4D469
+    img
+        max-width: 10rem
+        transition: all .3s ease
+    &:hover img
+        transform: scale(1.2)
+.category
+    padding: 0
+    border-radius: 7.8rem 0px
+    background: linear-gradient(180deg, #F4D469 0%, #F4D469 80%,  #A7825D 100%)
+    background-size: 100% 500%
+    background-position: 0
+    transition: all .3s ease
+    &:hover
+        background-position-y: 100%
+    img
+        height: 52.5rem
+        width: 52.5rem
+        object-fit: cover
+        border-radius: 7.5rem 0px 0px 0px
+        margin-right: 5rem
+    p
+        color: #000
+        font-size: 12rem
+        font-style: italic
+        font-weight: 100
+        min-height: 36rem
+        +media(769)
+            min-height: auto
+
+        +media(991)
+            font-size: 10rem
+        +media(1090)
+            font-size: 12rem
+
+.category-block
+    overflow: hidden
+    transition: all .5s ease
+    text-align: center
+    
+    img
+        margin: 5.75rem auto
+        +media(769)
+            margin: 0 5.75rem 0 -1rem
+
+    +media(769)
+        text-align: left
+
+
+.category-block:hover
+    transform: translateY(-7px)
+
+.aboutus 
+    h1, h2
+        color: #000
+        font-size: 6rem
+        font-style: italic
+        font-weight: 400
+        margin-bottom: 10rem
+    p , li
+        color: #000
+        font-size: 6rem
+        font-style: italic
+        font-weight: 200
+
+    li 
+        margin-bottom: 5rem
+
+    section
+        padding: 10rem 15rem 10rem 10rem
+        border-radius: 0px 0px 133px 0px
+        background: linear-gradient(180deg, #F4D469 1.24%, #A7825D 100%)
+
+.image-block 
+    flex-direction: column
+    align-items: center
+    img
+        display: block
+        max-width: 100rem
+        height: 65vw
+        min-height: 600px
+        border-radius: 56.5rem
+        object-fit: cover
+        margin-bottom: 7rem
+        +media(360)
+            max-width: 113rem
+    a
+        font-size: 10rem
+
+.flex-wrap-wrap-reverse
+    flex-wrap: wrap-reverse
+
+img.image-block--img
+    height: 45vw
+
+.categories
+    margin-bottom: 4rem
+
+.aboutus
+    margin-bottom: 10rem
+
+.aboutus-text:last-child
+    border-radius: 72px 0px 0px 0px
+
+.contact-form 
+    display: block
+    margin: auto
+    max-width: 145rem
+    margin-bottom: 8rem
+    p
+        color: #000
+        font-size: 6rem
+        font-style: italic
+        font-weight: 100
+    form
+        width: 100%
+        padding: 13.5rem
+        border-radius: 12.5rem 0px
+        background: linear-gradient(to bottom, rgba(244, 212, 105, 0.64) 0%, #A7825D 88.18%)
+
+        input
+            display: block
+            width: 100%
+            border-radius: 0px 6rem
+            margin-bottom: 3rem
+
+.form-btn
+    padding-top: 6rem
+            
+
+footer 
+    column-gap: 30rem
+    row-gap: 10rem
+    flex-wrap: wrap
+    background: linear-gradient(270deg, #F4D469 0%, #A7825D 100%)
+    padding: 10rem 5rem
+    ul
+        margin-bottom: 7rem
+    li a
+        color: #000
+        font-size: 8rem
+        font-style: italic
+        font-weight: 100
+        &:hover
+            text-decoration: underline
+

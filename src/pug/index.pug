@@ -1,0 +1,116 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="css/styles.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    body 
+        include components/Header.pug
+        
+        main.wrapper
+            .header-underline.d-flex.align-items-center
+                a(href="#").button Каталог
+                form(action="").d-flex.align-items-stretch
+                    input(type="text" placeholder="Знайти щось цікаве...").search
+                    button(type="submit").button Знайти
+            .products.row.g-5.d-flex.justify-content-center
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+            .categories.row.g-5
+                
+                a(href="#").category-block.col-sm-6.col-md-12.col-lg-6
+                    .category.d-flex.d-flex.align-items-center.row
+                        img(src="img/category1.jpg", alt="").col-12.col-md-4.col-lg-4
+                        p.col-sm-12.col-md-8.col-lg-6 Електроніка
+                a(href="#").category-block.col-sm-6.col-md-12.col-lg-6
+                    .category.d-flex.d-flex.align-items-center.row
+                        img(src="img/clock.jpeg", alt="").col-12.col-md-4.col-lg-4
+                        p.col-sm-12.col-md-8.col-lg-6 Годинники
+                a(href="#").category-block.col-sm-6.col-md-12.col-lg-6
+                    .category.d-flex.d-flex.align-items-center.row
+                        img(src="img/dishes.jpeg", alt="").col-12.col-md-4.col-lg-4
+                        p.col-sm-12.col-md-8.col-lg-6 Посуд
+                a(href="#").category-block.col-sm-6.col-md-12.col-lg-6
+                    .category.d-flex.d-flex.align-items-center.row
+                        img(src="img/models.jpeg", alt="").col-12.col-md-4.col-lg-4
+                        p.col-sm-12.col-md-8.col-lg-6 Статуетки, моделі
+                a(href="#").category-block.col-sm-6.col-md-12.col-lg-6
+                    .category.d-flex.d-flex.align-items-center.row
+                        img(src="img/art.jpeg", alt="").col-12.col-md-4.col-lg-4
+                        p.col-sm-12.col-md-8.col-lg-6 Мистецтво
+                a(href="#").category-block.col-sm-6.col-md-12.col-lg-6
+                    .category.d-flex.d-flex.align-items-center.row
+                        img(src="img/other.jpeg", alt="").col-12.col-md-4.col-lg-4
+                        p.col-sm-12.col-md-8.col-lg-6 Інше
+            
+            .aboutus.d-flex.justify-content-between.row.g-5
+                section.aboutus-text.col-sm-12.col-md-12.col-lg-6
+                    h1 Вітаємо вас у нашому інтернет-магазині “Антік”.
+                    p Ми – команда захоплених колекціонерів і цінителів антикваріату, яка вже понад 5 років займається доставкою унікальних старовинних речей із Нідерландів в Україну. Наш асортимент включає предмети з історією: від витончених меблів і порцеляни до колекційних дрібниць, які наповнять ваш простір атмосферою минулих століть. 
+                        br 
+                        br
+                        | Ми маємо фізичний магазин у місті Хмельницький, який став місцем зустрічі для колекціонерів та поціновувачів старовини. А тепер раді вітати вас і на нашому новому сайті, де можна легко переглянути та придбати товари онлайн. Кожен наш предмет ретельно відбирається, щоб відповідати вашим очікуванням і дарувати радість від володіння справжніми антикварними скарбами. Ми віримо, що кожна річ має свою душу і здатна стати особливою частиною вашого дому чи колекції. 
+                        br
+                        br
+                        | Долучайтеся до нашої спільноти колекціонерів та знайдіть свою історію серед наших скарбів! 
+                .image-block.col-sm-12.col-md-12.col-lg-6.d-flex.justify-content-between
+
+                        img(src="img/aboutus.jpg", alt="")
+                        .d-flex.justify-content-center
+                            a(href="#").button Каталог
+            .aboutus.d-flex.justify-content-between.row.g-5.flex-wrap-wrap-reverse
+                .image-block.col-sm-12.col-md-12.col-lg-6.d-flex.justify-content-between
+
+                        img(src="img/novaposht.jpeg", alt="").image-block--img
+                        .d-flex.justify-content-center
+                            a(href="#").button Каталог
+                section.aboutus-text.col-sm-12.col-md-12.col-lg-6
+                    h2 Як придбати товар у нашому інтернет-магазині: 
+
+                    ol
+                        li 1. Спершу, оберіть потрібний товар! У нас точно знайдеться те, що буде вам по душі та доповнить колекцію...
+                        li 2. Додайте усі товари, котрі бажаєте придбати у кошик.
+                        li 3. Зайдіть до свого кошика і натисніть кнопку “замовити”, після чого заповніть усю інформацію.
+                        li 4. Протягом нетривалого часу вам напише адміністратор для уточнення та відправки замовлення.
+
+                    p Усі замовлення відправляються виключно “Накладним платежем”, або “сейф-сервісом”, отже ваша безпека та якість гарантована!
+
+            .contact-form 
+                form(action="") 
+                    label(for="userName") 
+                        p Ім'я
+
+                    input(type="text", name="userName" placeholder="Написати...").search
+                    label(for="userName") 
+                        p Телефон
+
+                    input(type="text", name="userName" placeholder="Написати...").search
+                    label(for="userName") 
+                        p Зручний месенджер
+
+                    input(type="text", name="userName" placeholder="Написати...").search
+                    label(for="userName") 
+                        p Текст звернення
+
+                    input(type="text", name="userName" placeholder="Написати...").search
+
+                    .form-btn.d-flex.justify-content-center
+                        button(type="submit").button Зв'язатись
+        include components/Footer.pug
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
