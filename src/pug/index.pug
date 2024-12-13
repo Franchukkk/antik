@@ -11,10 +11,20 @@ html(lang="en")
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     body 
+        .header-sm-popup
+            ul
+                li
+                    a(href="#search").w-100 Пошук
+                li
+                    a(href="#categories").w-100 Категорії
+                li
+                    a(href="#aboutus").w-100 Про нас
+                li
+                    a(href="#form").w-100 Зв'язок
         include components/Header.pug
         
         main.wrapper
-            .header-underline.d-flex.align-items-center
+            .header-underline.d-flex.align-items-center#search
                 a(href="#").button Каталог
                 form(action="").d-flex.align-items-stretch
                     input(type="text" placeholder="Знайти щось цікаве...").search
@@ -32,7 +42,7 @@ html(lang="en")
                 include components/product-card.pug
                 include components/product-card.pug
                 include components/product-card.pug
-            .categories.row.g-5
+            .categories.row.g-5#categories
                 
                 a(href="#").category-block.col-sm-6.col-md-12.col-lg-6
                     .category.d-flex.d-flex.align-items-center.row
@@ -59,7 +69,7 @@ html(lang="en")
                         img(src="img/other.jpeg", alt="").col-12.col-md-4.col-lg-4
                         p.col-sm-12.col-md-8.col-lg-6 Інше
             
-            .aboutus.d-flex.justify-content-between.row.g-5
+            .aboutus.d-flex.justify-content-between.row.g-5#aboutus
                 section.aboutus-text.col-sm-12.col-md-12.col-lg-6
                     h1 Вітаємо вас у нашому інтернет-магазині “Антік”.
                     p Ми – команда захоплених колекціонерів і цінителів антикваріату, яка вже понад 5 років займається доставкою унікальних старовинних речей із Нідерландів в Україну. Наш асортимент включає предмети з історією: від витончених меблів і порцеляни до колекційних дрібниць, які наповнять ваш простір атмосферою минулих століть. 
@@ -91,7 +101,7 @@ html(lang="en")
 
                     p Усі замовлення відправляються виключно “Накладним платежем”, або “сейф-сервісом”, отже ваша безпека та якість гарантована!
 
-            .contact-form 
+            .contact-form#form
                 form(action="") 
                     label(for="userName") 
                         p Ім'я
@@ -113,4 +123,6 @@ html(lang="en")
                     .form-btn.d-flex.justify-content-center
                         button(type="submit").button Зв'язатись
         include components/Footer.pug
+
+        script(src="js/scripts.js") 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
