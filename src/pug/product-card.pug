@@ -1,0 +1,69 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="css/styles.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    body 
+        .header-sm-popup
+            ul
+                li
+                    a(href="#search").w-100 Пошук
+                li
+                    a(href="#categories").w-100 Категорії
+                li
+                    a(href="#aboutus").w-100 Про нас
+                li
+                    a(href="#form").w-100 Зв'язок
+        include components/Header.pug
+        
+        main.wrapper
+            .product-card-info.row
+                .product-card-info-img.col-12.col-lg-6.d-flex.align-items-stretch
+                    div
+                        img(src="img/product-card-image.jpeg", alt="")
+                        .next-images-line.row 
+                            .col-4 
+                                img(src="img/product-card-image.jpeg", alt="")
+                            .col-4 
+                                img(src="img/product-card-image.jpeg", alt="")
+                            .col-4 
+                                img(src="img/product-card-image.jpeg", alt="")
+                        .card-btns.d-flex.justify-content-center.align-items-center.row
+                            .col-12.col-md-6
+                                p.product-price 999 грн 
+                            .col-12.col-md-6.buy-btn
+                                a(href="#") В кошик
+
+                .product-card-info-description.col-12.col-lg-6
+                    div
+                        h2 Тіпа жосткий старий товарчик
+                        p Цю фігню ви більше ніде не найдете. Це сама фігняна фігня із всіх всеможливих фігонь на цій планеті.
+                        p Доречі, точно! Це ж планета Земля... Хаха, ви ж навіть не знали, що вашу попер допер колекшн доповне Земна фігняна фігулювовівіна!!!
+
+
+
+            .products.row.g-5.d-flex.justify-content-center
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+                include components/product-card.pug
+            
+        include components/Footer.pug
+
+        script(src="js/scripts.js") 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
