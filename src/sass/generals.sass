@@ -169,7 +169,7 @@ ul
     font-style: italic
     font-weight: 100
     border-radius: 0 0 0 23px
-    padding: 3rem 10rem
+    padding: 3rem 7rem
     border: none
     outline: none
     & + button
@@ -412,7 +412,7 @@ img.image-block--img
         border-radius: 12.5rem 0px
         background: linear-gradient(to bottom, rgba(244, 212, 105, 0.64) 0%, #A7825D 88.18%)
 
-        input
+        input:not(input[type='radio'])
             display: block
             width: 100%
             border-radius: 0px 6rem
@@ -527,11 +527,16 @@ div.product-card-info-description > div
     left: 0
     overflow-y: scroll 
     z-index: 20
-    background-color: #fff
+    background-color: #EBEBEB
     transition: all 1s ease
+
+.basket-footer
+    display: none
 
 .basket-popup.basket-active
     top: 0
+    .basket-footer
+        display: block
 
 .basket-main
     padding: 0 2rem
@@ -583,3 +588,34 @@ div.product-card-info-description > div
         transition: all .3s ease
     &:hover img
         transform: scale(1.1)
+
+
+
+
+.delivery-type
+    margin-bottom: 5rem
+
+    label
+        color: #000
+        font-size: 5rem
+        font-style: italic
+        font-weight: 100
+
+.btnsrow
+    align-items: center
+    column-gap: 2rem
+    margin-bottom: 2rem
+
+input[type="radio"]
+    width: 5rem
+    height: 4rem
+
+input[type="radio"]:checked
+    accent-color: #f7ce00
+    border-color: #f7eb00
+    outline-color: #f7eb00
+
+.check-out-popup-js
+    z-index: 30
+    .basket-footer
+        z-index: 30

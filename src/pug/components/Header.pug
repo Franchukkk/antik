@@ -19,7 +19,61 @@ header
                 ul.d-flex
                     a(href="#").cart.d-flex.align-items-center.cart-open-btn
                         img(src="img/cart.svg", alt="")
-.basket-popup 
+
+.basket-popup.check-out-popup-js
+    .basket-header
+        .wrapper.d-flex.justify-content-between
+            h2 Оформлення
+            .cross.d-flex.justify-content-center.align-items-center.checkout-btn
+                img(src="img/cross.svg", alt="")
+    .wrapper.basket-main.products.row.g-5.d-flex
+        .contact-form.contact-form-popup
+            form(action="") 
+                label(for="userName") 
+                    p Ім'я
+
+                input(type="text", name="userName" placeholder="Написати...").search
+                label(for="userName") 
+                    p Телефон
+
+                input(type="text", name="userName" placeholder="Написати...").search
+                label(for="userName") 
+                    p Зручний месенджер
+
+                input(type="text", name="userName" placeholder="Написати...").search
+                
+                p Спосіб достаки
+                .delivery-type
+                    .row.g-3 
+                        .col-12
+                            .d-flex.btnsrow
+                                input(type="radio" name="deliveryType" id="deliveryType1")
+                                label(for="deliveryType1") Нова пошта “Сейф- сервіс”
+                        .col-12.row
+                            .d-flex.btnsrow
+                                input(type="radio" name="deliveryType" id="deliveryType2")
+                                label(for="deliveryType2") Нова пошта “Накладний платіж”
+                        .col-12.row
+                            .d-flex.btnsrow
+                                input(type="radio" name="deliveryType" id="deliveryType3")
+                                label(for="deliveryType3") Укр. пошта “Накладний платіж”
+                
+                label(for="city") 
+                    p Населений пункт
+                input(type="text", name="city" placeholder="Написати...").search
+
+                label(for="department") 
+                    p Відділення, або поштомат
+
+                input(type="text", name="department" placeholder="Написати...").search
+
+                
+    .basket-footer
+        .wrapper.d-flex.justify-content-between.align-items-center
+            h2 9999 грн
+            .buy-btn
+                a(href="#") Замовити
+.basket-popup.basket-popup-js
     .basket-header
         .wrapper.d-flex.justify-content-between
             h2 Кошик
@@ -38,7 +92,8 @@ header
         .wrapper.d-flex.justify-content-between.align-items-center
             h2 9999 грн
             .buy-btn
-                a(href="#") Замовити
+                a(href="#").checkout-btn Замовити
+
 .header-sm-popup
     ul
         li

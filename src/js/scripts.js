@@ -87,11 +87,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const cartOpenBtns = document.querySelectorAll('.cart-open-btn');
-    const basketPopup = document.querySelector('.basket-popup');
+    const basketPopup = document.querySelector('.basket-popup-js');
 
     cartOpenBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             basketPopup.classList.toggle('basket-active');
         });
     });
+
+    const checkoutOpenBtns = document.querySelectorAll('.checkout-btn');
+    const checkoutPopup = document.querySelector('.check-out-popup-js');
+
+    checkoutOpenBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            event.preventDefault();
+            basketPopup.classList.toggle('basket-active');
+            checkoutPopup.classList.toggle('basket-active');
+        });
+    });
 });
+
+
