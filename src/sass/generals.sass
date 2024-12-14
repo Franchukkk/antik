@@ -197,6 +197,7 @@ ul
     &::before
         content: ''
         position: absolute
+        display: none
         top: -10rem
         right: 4rem
         width: 5.5rem
@@ -205,7 +206,8 @@ ul
         background: linear-gradient(180deg, #F4D469 0%, #A7825D 100%)
         z-index: 3
         transition: all .3s ease
-
+        +media(500)
+            display: block
     
 
 .show-circle::before
