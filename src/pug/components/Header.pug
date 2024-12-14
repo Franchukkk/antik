@@ -3,20 +3,20 @@ header
         .wrapper
             nav.d-flex.justify-content-between.w-100
                 
-                ul.align-items-center.align-items-md-end.align-items-lg-end.d-flex
+                ul.align-items-center.align-items-md-end.align-items-lg-end.d-flex.burger-list#nav-list
                     li.d-block.d-md-none.d-lg-none
                         .burger
                             span
                     li.d-none.d-md-block.d-lg-block
-                        a(href="#search") Пошук
+                        a(href="#search" data-section="search") Пошук
                     li.d-none.d-md-block.d-lg-block
-                        a(href="#categories") Категорії
+                        a(href="#categories" data-section="categories") Категорії
                     li.d-none.d-md-block.d-lg-block
-                        a(href="#aboutus") Про нас
+                        a(href="#aboutus" data-section="aboutus") Про нас
                     li.d-none.d-md-block.d-lg-block
-                        a(href="#form") Зв'язок
+                        a(href="#form" data-section="form") Зв'язок
                     
                 ul.d-flex
                     a(href="#").cart.d-flex.align-items-center
                         img(src="img/cart.svg", alt="")
-                    
+
