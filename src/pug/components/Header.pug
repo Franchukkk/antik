@@ -17,6 +17,35 @@ header
                         a(href="index.html#form" data-section="form") Зв'язок
                     
                 ul.d-flex
-                    a(href="#").cart.d-flex.align-items-center
+                    a(href="#").cart.d-flex.align-items-center.cart-open-btn
                         img(src="img/cart.svg", alt="")
-
+.basket-popup 
+    .basket-header
+        .wrapper.d-flex.justify-content-between
+            h2 Кошик
+            .cross.d-flex.justify-content-center.align-items-center.cart-open-btn
+                img(src="img/cross.svg", alt="")
+    .wrapper.basket-main.products.row.g-5.d-flex
+        include product-basket.pug
+        include product-basket.pug
+        include product-basket.pug
+        include product-basket.pug
+        include product-basket.pug
+        include product-basket.pug
+        include product-basket.pug
+        include product-basket.pug
+    .basket-footer
+        .wrapper.d-flex.justify-content-between.align-items-center
+            h2 9999 грн
+            .buy-btn
+                a(href="#") Замовити
+.header-sm-popup
+    ul
+        li
+            a(href="#search").w-100 Пошук
+        li
+            a(href="#categories").w-100 Категорії
+        li
+            a(href="#aboutus").w-100 Про нас
+        li
+            a(href="#form").w-100 Зв'язок

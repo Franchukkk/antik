@@ -84,3 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (element) observer.observe(element);
   });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cartOpenBtns = document.querySelectorAll('.cart-open-btn');
+    const basketPopup = document.querySelector('.basket-popup');
+
+    cartOpenBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            basketPopup.classList.toggle('basket-active');
+        });
+    });
+});

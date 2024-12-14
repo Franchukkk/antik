@@ -521,21 +521,39 @@ div.product-card-info-description > div
 .basket-popup 
     position: fixed
     min-width: 300px
-    width: 50%
+    width: 100%
     height: 100vh
-    top: 100px
+    top: -200%
+    left: 0
+    overflow-y: scroll 
     z-index: 20
+    background-color: #fff
+    transition: all 1s ease
+
+.basket-popup.basket-active
+    top: 0
+
+.basket-main
+    padding: 0 2rem
+    margin-bottom: 150px
 
 .basket-header
     border-radius: 0px 0px 0px 15px
     background: linear-gradient(175deg, #F4D469 23.11%, #E7C667 34.03%, #A7825D 87.35%)
     margin-bottom: 8rem
+
+.basket-popup 
+
     h2
         color: #000
-        font-size: 10rem
+        font-size: 7.5rem
         font-style: italic
         font-weight: 100
         padding: 4rem 8rem
+        +media(350)
+            font-size: 8rem
+        +media(400)
+            font-size: 10rem
 
 
 .figure-basket
@@ -543,3 +561,25 @@ div.product-card-info-description > div
     width: 100%
     .figure-image img
         height: 30rem
+
+.basket-footer
+    position: fixed
+    width: 100%
+    bottom: 0
+    left: 0
+    border-radius: 15px 0px 0px 0px
+    background: linear-gradient(175deg, #F4D469 23.11%, #E7C667 34.03%, #A7825D 87.35%)
+
+    a
+        width: auto
+        border-radius: 15px 0px 0px 0px
+
+.cross
+    background-color: #F4D469
+    border-radius: 0px 0px 0px 10px
+    padding: 0 6.4rem
+    cursor: pointer
+    img
+        transition: all .3s ease
+    &:hover img
+        transform: scale(1.1)
