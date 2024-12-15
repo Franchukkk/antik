@@ -17,51 +17,40 @@ html(lang="en")
         
         main.wrapper
             .header-underline.d-flex.align-items-center#search
-                a(href="#").button Каталог
+                a(href="#categories").button Каталог
                 form(action="").d-flex.align-items-stretch
                     input(type="text" placeholder="Знайти щось цікаве...").search
                     button(type="submit").button Знайти
-            .products.row.g-5.d-flex.justify-content-center
-                include components/product-card.pug
-                include components/product-card.pug
-                include components/product-card.pug
-                include components/product-card.pug
-                include components/product-card.pug
-                include components/product-card.pug
-                include components/product-card.pug
-                include components/product-card.pug
-                include components/product-card.pug
-                include components/product-card.pug
-                include components/product-card.pug
-                include components/product-card.pug
+            .products.row.g-5.d-flex.justify-content-center#products
+
             .categories.row.g-5#categories
                 
-                a(href="category.html").category-block.col-12.col-lg-6
+                a(href="category.html" data-value="Electronics").category-block.col-12.col-lg-6
                     .category.d-flex.align-items-center.row
                         .col-4
                             img(src="img/category1.jpg", alt="")
                         p.col-8.d-flex.align-items-center Електроніка
-                a(href="category.html").category-block.col-12.col-lg-6
+                a(href="category.html" data-value="Clocks").category-block.col-12.col-lg-6
                     .category.d-flex.align-items-center.row
                         .col-4
                             img(src="img/clock.jpeg", alt="")
                         p.col-8.d-flex.align-items-center Годинники
-                a(href="category.html").category-block.col-12.col-lg-6
+                a(href="category.html" data-value="Dishes").category-block.col-12.col-lg-6
                     .category.d-flex.align-items-center.row
                         .col-4
                             img(src="img/dishes.jpeg", alt="")
                         p.col-8.d-flex.align-items-center Посуд
-                a(href="category.html").category-block.col-12.col-lg-6
+                a(href="category.html" data-value="Models").category-block.col-12.col-lg-6
                     .category.d-flex.align-items-center.row
                         .col-4
                             img(src="img/models.jpeg", alt="")
                         p.col-8.d-flex.align-items-center Статуетки, моделі
-                a(href="category.html").category-block.col-12.col-lg-6
+                a(href="category.html" data-value="Art").category-block.col-12.col-lg-6
                     .category.d-flex.align-items-center.row
                         .col-4
                             img(src="img/art.jpeg", alt="")
                         p.col-8.d-flex.align-items-center Мистецтво
-                a(href="category.html").category-block.col-12.col-lg-6
+                a(href="category.html" data-value="Other").category-block.col-12.col-lg-6
                     .category.d-flex.align-items-center.row
                         .col-4
                             img(src="img/other.jpeg", alt="")
@@ -85,13 +74,13 @@ html(lang="en")
 
                         img(src="img/aboutus.jpg", alt="")
                         .d-flex.justify-content-center
-                            a(href="#").button Каталог
+                            a(href="#categories").button Каталог
             .aboutus.d-flex.justify-content-between.row.g-5.flex-wrap-wrap-reverse.nova-section
                 .image-block.col-sm-12.col-md-12.col-lg-6
 
                         img(src="img/novaposht.jpeg", alt="").image-block--img
                         .d-flex.justify-content-center
-                            a(href="#").button Каталог
+                            a(href="#categories").button Каталог
                 section.aboutus-text.col-sm-12.col-md-12.col-lg-6
                     .scroll
                         h2 Як придбати товар у нашому інтернет-магазині: 
@@ -105,26 +94,26 @@ html(lang="en")
                         p Усі замовлення відправляються виключно “Накладним платежем”, або “сейф-сервісом”, отже ваша безпека та якість гарантована!
 
             .contact-form#form
-                form(action="") 
+                form() 
                     label(for="userName") 
                         p Ім'я
 
-                    input(type="text", name="userName" placeholder="Написати...").search
+                    input(type="text", name="userName" placeholder="Написати..." required).search
                     label(for="userName") 
                         p Телефон
 
-                    input(type="text", name="userName" placeholder="Написати...").search
+                    input(type="text", name="userName" placeholder="Написати..." required).search
                     label(for="userName") 
                         p Зручний месенджер
 
-                    input(type="text", name="userName" placeholder="Написати...").search
+                    input(type="text", name="userName" placeholder="Написати..." required).search
                     label(for="userName") 
                         p Текст звернення
 
-                    input(type="text", name="userName" placeholder="Написати...").search
+                    input(type="text", name="userName" placeholder="Написати..." required).search
 
                     .form-btn.d-flex.justify-content-center
-                        button(type="submit").button.feedback-popup-open Зв'язатись
+                        button(type="submit").button Зв'язатись
         include components/Footer.pug
 
         script(src="js/scripts.js") 

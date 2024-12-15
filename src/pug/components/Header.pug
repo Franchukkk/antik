@@ -17,7 +17,7 @@ header
                         a(href="index.html#form" data-section="form") Зв'язок
                     
                 ul.d-flex
-                    a(href="#").cart.d-flex.align-items-center.cart-open-btn
+                    a(href="#").cart.d-flex.align-items-center.cart-open-btn#cartUpdate
                         img(src="img/cart.svg", alt="")
 
 .basket-popup.check-out-popup-js
@@ -28,71 +28,65 @@ header
                 img(src="img/cross.svg", alt="")
     .wrapper.basket-main.products.row.g-5.d-flex
         .contact-form.contact-form-popup
-            form(action="") 
+            form(action="")#checkOutForm
                 label(for="userName") 
                     p Ім'я
 
-                input(type="text", name="userName" placeholder="Написати...").search
+                input(type="text", name="userName" placeholder="Написати..." required).search
                 label(for="userName") 
                     p Телефон
 
-                input(type="text", name="userName" placeholder="Написати...").search
-                label(for="userName") 
-                    p Зручний месенджер
+                input(type="tel", name="userName" placeholder="Написати..." required).search#phoneInput
+                label(for="userPromo") 
+                    p Промокод
 
-                input(type="text", name="userName" placeholder="Написати...").search
+                input(type="text", name="userPromo" placeholder="Написати...").search
                 
                 p Спосіб достаки
                 .delivery-type
                     .row.g-3 
                         .col-12
                             .d-flex.btnsrow
-                                input(type="radio" name="deliveryType" id="deliveryType1")
+                                input(type="radio" name="deliveryType" id="deliveryType1" required)
                                 label(for="deliveryType1") Нова пошта “Сейф- сервіс”
                         .col-12.row
                             .d-flex.btnsrow
-                                input(type="radio" name="deliveryType" id="deliveryType2")
+                                input(type="radio" name="deliveryType" id="deliveryType2" required)
                                 label(for="deliveryType2") Нова пошта “Накладний платіж”
                         .col-12.row
                             .d-flex.btnsrow
-                                input(type="radio" name="deliveryType" id="deliveryType3")
+                                input(type="radio" name="deliveryType" id="deliveryType3" required)
                                 label(for="deliveryType3") Укр. пошта “Накладний платіж”
                 
                 label(for="city") 
                     p Населений пункт
-                input(type="text", name="city" placeholder="Написати...").search
+                input(type="text", name="city" placeholder="Написати..." required).search
 
                 label(for="department") 
                     p Відділення, або поштомат
 
-                input(type="text", name="department" placeholder="Написати...").search
+                input(type="text", name="department" placeholder="Написати..." required).search
 
                 
-    .basket-footer
-        .wrapper.d-flex.justify-content-between.align-items-center
-            h2 9999 грн
-            .buy-btn
-                a(href="#").check-out-open-ready-popup Замовити
+                .basket-footer
+                    .wrapper.d-flex.justify-content-between.align-items-center
+                        h2#allPriceWithPromo 9999 грн
+                        .buy-btn
+
+                            button(type="submit").check-out-open-ready-popup Замовити
 .basket-popup.basket-popup-js
     .basket-header
         .wrapper.d-flex.justify-content-between
             h2 Кошик
             .cross.d-flex.justify-content-center.align-items-center.cart-open-btn
                 img(src="img/cross.svg", alt="")
-    .wrapper.basket-main.products.row.g-5.d-flex
-        include product-basket.pug
-        include product-basket.pug
-        include product-basket.pug
-        include product-basket.pug
-        include product-basket.pug
-        include product-basket.pug
-        include product-basket.pug
-        include product-basket.pug
+    .wrapper.basket-main.products.row.g-5.d-flex#productsInBasket
+
     .basket-footer
         .wrapper.d-flex.justify-content-between.align-items-center
-            h2 9999 грн
+            h2#totalPrice 9999 грн
             .buy-btn
-                a(href="#").checkout-btn Замовити
+                a(href="#").checkout-btn#checkoutBtn Замовити
 
 .header-sm-popup
     ul
