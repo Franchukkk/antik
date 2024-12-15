@@ -107,4 +107,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const heightJsBlockCard = document.querySelector('#heightJsBlockCard');
+    const takeJsHeight = document.querySelector('#takeJsHeight');
 
+    heightJsBlockCard.style.height = takeJsHeight.getBoundingClientRect().height + "px";
+});
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const nextImagesContainer = document.querySelector('.next-images-line')
+    const mainImage = document.querySelector('.product-card-info-img .bgwhite > img')
+
+    nextImagesContainer.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG') {
+            const newSrc = e.target.getAttribute('src')
+            mainImage.setAttribute('src', newSrc)
+        }
+    })
+})

@@ -15,28 +15,38 @@ html(lang="en")
         
         main.wrapper
             .product-card-info.row
-                .product-card-info-img.col-12.col-lg-6.d-flex.align-items-stretch
-                    div
-                        img(src="img/product-card-image.jpeg", alt="")
-                        .next-images-line.row 
-                            .col-4 
-                                img(src="img/product-card-image.jpeg", alt="")
-                            .col-4 
-                                img(src="img/product-card-image.jpeg", alt="")
-                            .col-4 
-                                img(src="img/product-card-image.jpeg", alt="")
-                        .card-btns.d-flex.justify-content-center.align-items-center.row
-                            .col-12.col-md-6
-                                p.product-price 999 грн 
-                            .col-12.col-md-6.buy-btn
-                                a(href="#") В кошик
+                .col-12.col-lg-6
+                    #takeJsHeight
+                        .product-card-info-img
+                            .bgwhite.p-3.brs
+                                img(src="img/clock.jpeg", alt="")
+                                .next-images-line.row
+                                    .col-3
+                                        img(src="img/clock.jpeg", alt="")
+                                    .col-3
+                                        img(src="img/models.jpeg", alt="")
+                                    .col-3
+                                        img(src="img/other.jpeg", alt="")
+                                    .col-3
+                                        img(src="img/dishes.jpeg", alt="")
+                                .card-btns.d-flex.align-items-center.justify-content-between
+                                    a(href="#").button В кошик
+                                    .d-flex.justify-content-end
+                                        p.product-price 999 грн.
+                        .buy-description
+                            p.m-0 Після додавання товару у кошик, ви знайдете його там і зможете офоримити замовлення. Відправка займе 1-4 дні. Відправляємо накладним платежем через сервіси “Укр- пошта” й “Нова пошта”. Після замовлення вам напише адміністратор для уточнення...
 
-                .product-card-info-description.col-12.col-lg-6
-                    div
+                .product-card-info-description.col-12.col-lg-6#heightJsBlockCard
+                    div.bgwhite
                         h2 Тіпа жосткий старий товарчик
                         p Цю фігню ви більше ніде не найдете. Це сама фігняна фігня із всіх всеможливих фігонь на цій планеті.
                         p Доречі, точно! Це ж планета Земля... Хаха, ви ж навіть не знали, що вашу попер допер колекшн доповне Земна фігняна фігулювовівіна!!!
-
+                        p Доставку вам хоть в китай замутимо.В нас доствщики дяді колі все роблять чьотко!!!
+                        p Я вам отвечаю. Це самі круті дядьоли на райончику. Це дядя Тоік і Василь Петуховров. Вони люблять на своїх ланосах антік розвозити по Китаю...
+                        p Цю фігню ви більше ніде не найдете. Це сама фігняна фігня із всіх всеможливих фігонь на цій планеті.
+                        p Доречі, точно! Це ж планета Земля... Хаха, ви ж навіть не знали, що вашу попер допер колекшн доповне Земна фігняна фігулювовівіна!!!
+                        p Доставку вам хоть в китай замутимо.В нас доствщики дяді колі все роблять чьотко!!!
+                        p Я вам отвечаю. Це самі круті дядьоли на райончику. Це дядя Тоік і Василь Петуховров. Вони люблять на своїх ланосах антік розвозити по Китаю...
 
 
             .products.row.g-5.d-flex.justify-content-center

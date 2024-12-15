@@ -444,9 +444,8 @@ footer
     padding-top: 10rem
     margin-bottom: 5rem
 
-    &>div>div
-        background-color: #fff
-        padding: 2rem
+.bgwhite
+    background-color: #fff
 
 .product-card-info-img > div > img
     width: 100%
@@ -460,14 +459,20 @@ footer
     height: 35rem
     width: 100%
     object-fit: cover
+    cursor: pointer
+    transition: all .3s ease
+    &:hover
+        transform: scale(1.1)
     +media(991)
         height: 26rem
 
 .product-price
     color: #000
-    font-size: 16rem
+    font-size: 11rem
     font-style: italic
     font-weight: 300
+    +media(450)
+        font-size: 16rem
 
 .buy-btn a
     display: inline-block
@@ -486,6 +491,8 @@ footer
         transform: scale(1.02)
 
 div.product-card-info-description
+    display: flex
+    align-items: stretch
     padding: 7rem 0
     +media(991)
         padding: 0 7rem
@@ -494,17 +501,29 @@ div.product-card-info-description
         font-size: 10rem
         font-style: italic
         font-weight: 200
+        margin-bottom: 4rem
 
     p
         color: #000
-        font-size: 8rem
+        font-size: 6rem
         font-style: italic
         font-weight: 100
         margin-bottom: 4rem
 
+
 div.product-card-info-description > div
+    overflow-y: scroll
     padding:  4rem 2rem
-    height: 100%
+    border-radius: 7.5rem 0px
+    background: linear-gradient(180deg, #F4D469 0%, #AA855E 100%)
+    &::-webkit-scrollbar
+        width: 5px
+    &::-webkit-scrollbar-track
+        background: transparent
+    &::-webkit-scrollbar-thumb
+
+        background: #e6b71e
+        border-radius: 10px
     +media(991)
         padding:  4rem 9rem
 
@@ -621,3 +640,35 @@ input[type="radio"]:checked
     z-index: 30
     .basket-footer
         z-index: 30
+
+.card-btns
+    padding-top: 2rem
+    margin-bottom: 2rem
+    +media(450)
+        padding-top: 0
+        margin-bottom: 0
+
+.card-btns a
+    font-size: 8rem
+    margin-left: 1rem
+
+.product-card-info-img
+    margin-bottom: 7rem
+
+.product-card-info-img > div
+    width: 100%
+
+.buy-description
+    border-radius: 0px 30px 0px 0px
+    background: linear-gradient(90deg, #F4D469 0%, #AD885F 100%)
+    p
+        color: #000
+        font-size: 5rem
+        font-style: italic
+        font-weight: 100
+        padding: 1.5rem 4rem
+
+.brs
+    border-radius: 7.5rem 0px 0px 0px
+    & > img
+        border-radius: 7.5rem 0px 0px 0px
