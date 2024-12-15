@@ -128,3 +128,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 })
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const checkOutOpenReadyPopup = document.querySelector('.check-out-open-ready-popup')
+    const succsessfulOrder = document.querySelector('.succsessful-order')
+
+    checkOutOpenReadyPopup.addEventListener('click', (e) => {
+        e.preventDefault()
+        succsessfulOrder.classList.toggle('d-none')
+    })
+
+    const feedbackOutOpenReadyPopup = document.querySelectorAll('.feedback-popup-open')
+    const succsessfulFeedback = document.querySelector('.succsessful-feedback')
+
+    feedbackOutOpenReadyPopup.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault()
+            succsessfulFeedback.classList.toggle('d-none')
+        })
+    })
+})

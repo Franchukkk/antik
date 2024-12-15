@@ -72,7 +72,7 @@ header
         .wrapper.d-flex.justify-content-between.align-items-center
             h2 9999 грн
             .buy-btn
-                a(href="#") Замовити
+                a(href="#").check-out-open-ready-popup Замовити
 .basket-popup.basket-popup-js
     .basket-header
         .wrapper.d-flex.justify-content-between
@@ -104,3 +104,12 @@ header
             a(href="index.html#aboutus").w-100 Про нас
         li
             a(href="index.html#form").w-100 Зв'язок
+
+.succsessful.succsessful-feedback.d-none
+    p Дякуємо за звернення, ми обов’язково надішлемо вам відповідь!
+    a(href="index.html#form").button.feedback-popup-open Зв’язатись знову
+
+
+.succsessful.succsessful-order.d-none
+    p Дякуємо за замовлення, ми вже готуємо його до відправки...
+    a(href="index.html").button Продовжити покупки
