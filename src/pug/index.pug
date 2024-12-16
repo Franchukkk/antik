@@ -18,8 +18,8 @@ html(lang="en")
         main.wrapper
             .header-underline.d-flex.align-items-center#search
                 a(href="#categories").button Каталог
-                form(action="").d-flex.align-items-stretch
-                    input(type="text" placeholder="Знайти щось цікаве...").search
+                form(action="" onsubmit="event.preventDefault(); localStorage.setItem('searchedProduct', document.querySelector('#searchInput').value); window.location.href = 'searchresults.html'").d-flex.align-items-stretch                    
+                    input(type="text" placeholder="Знайти щось цікаве...").search#searchInput
                     button(type="submit").button Знайти
             .products.row.g-5.d-flex.justify-content-center#products
 

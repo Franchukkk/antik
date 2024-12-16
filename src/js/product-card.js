@@ -60,7 +60,7 @@ if (window.location.pathname.includes('product-card.html')) {
                   <p class="price">${product.price} грн.</p>
                 </a>
                 <a class="card-btn al-center d-flex justify-content-center" data-value='${product.id}' href="#">
-                  <img src="img/cart.svg" alt="">
+                  <img src="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "img/tick.svg" : "img/cart.svg"}" alt="">
                 </a>
               </div>
             </figcaption>

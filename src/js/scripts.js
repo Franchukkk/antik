@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="card-text-block d-flex justify-content-between w-100">
               <a href="product-card.html" class="description-card" data-product-id="${product.id}">
-                <p>${product.description}</p>
+                <p>${product.name}</p>
                 <p class="price">${product.price} грн.</p>
               </a>
               <a href="#" data-value="${product.id}" class="card-btn al-center d-flex justify-content-center">
-                <img src="img/cart.svg" alt="cart">
+                <img src="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "img/tick.svg" : "img/cart.svg"}" alt="cart">
               </a>
             </div>
           </figcaption>
@@ -185,106 +185,150 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 })
   
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkOutOpenReadyPopup = document.querySelector('.check-out-open-ready-popup')
+        const succsessfulOrder = document.querySelector('.succsessful-order')
 
-  document.addEventListener('DOMContentLoaded', () => {
-      const checkOutOpenReadyPopup = document.querySelector('.check-out-open-ready-popup')
-      const succsessfulOrder = document.querySelector('.succsessful-order')
-
-      checkOutOpenReadyPopup.addEventListener('click', (e) => {
+        checkOutOpenReadyPopup.addEventListener('click', (e) => {
         
-          const form = document.getElementById('checkOutForm')
-          const inputs = form.querySelectorAll('input:not([name="userPromo"])')
-          let isValid = true
+            const form = document.getElementById('checkOutForm')
+            const inputs = form.querySelectorAll('input:not([name="userPromo"])')
+            let isValid = true
   
-          inputs.forEach(input => {
-              if (!input.value.trim()) {
-                  isValid = false
-              }
-          })
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false
+                }
+            })
   
-          if (!isValid) {
-              return
-          } else {
-              e.preventDefault()
-              document.querySelector('.check-out-popup-js').classList.toggle('basket-active');
+            if (!isValid) {
+                return
+            } else {
+                e.preventDefault()
+                document.querySelector('.check-out-popup-js').classList.toggle('basket-active');
         
-              const formData = {
-                  name: form.querySelector('input[name="userName"]').value,
-                  phone: form.querySelector('#phoneInput').value,
-                  promo: form.querySelector('input[type="text"][name="userPromo"]').value,
-                  deliveryType: form.querySelector('input[name="deliveryType"]:checked').nextElementSibling.textContent,
-                  city: form.querySelector('input[name="city"]').value,
-                  department: form.querySelector('input[name="department"]').value
-              }
+                const formData = {
+                    name: form.querySelector('input[name="userName"]').value,
+                    phone: form.querySelector('#phoneInput').value,
+                    promo: form.querySelector('input[type="text"][name="userPromo"]').value,
+                    deliveryType: form.querySelector('input[name="deliveryType"]:checked').nextElementSibling.textContent,
+                    city: form.querySelector('input[name="city"]').value,
+                    department: form.querySelector('input[name="department"]').value
+                }
 
-              const basketProducts = JSON.parse(localStorage.getItem('basketProducts')) || [];
-              const orderedProducts = basketProducts.map(id => {
-                  const product = products.find(p => p.id === id);
-                  return {
-                      name: product.name,
-                      price: product.price
-                  };
-              });
+                const basketProducts = JSON.parse(localStorage.getItem('basketProducts')) || [];
+                const orderedProducts = basketProducts.map(id => {
+                    const product = products.find(p => p.id === id);
+                    return {
+                        name: product.name,
+                        price: product.price,
+                        photo: product.images[0]
+                    };
+                });
 
-              let totalPrice = orderedProducts.reduce((sum, product) => sum + product.price, 0);
+                let totalPrice = orderedProducts.reduce((sum, product) => sum + product.price, 0);
+                let discountedPrice = totalPrice;
             
-              if (formData.promo) {
-                  const foundPromo = promos.find(p => p.promo === formData.promo);
-                  if (foundPromo) {
-                      totalPrice = totalPrice - (totalPrice * foundPromo.discount / 100);
-                  }
-              }
+                if (formData.promo) {
+                    const foundPromo = promos.find(p => p.promo === formData.promo);
+                    if (foundPromo) {
+                        discountedPrice = totalPrice - (totalPrice * foundPromo.discount / 100);
+                    }
+                }
 
-              const productsMessage = orderedProducts.map(product => 
-                  `${product.name} - ${product.price} грн`
-              ).join('\n');
+                const productsMessage = orderedProducts.map(product => 
+                    `${product.name} - ${product.price} грн`
+                ).join('\n');
 
-              const message = `
-  <b>Нове замовлення!</b>
-  <b>Ім'я:</b> ${formData.name}
-  <b>Телефон:</b> ${formData.phone}
-  <b>Промокод:</b> ${formData.promo || 'Не вказано'}
-  <b>Спосіб доставки:</b> ${formData.deliveryType}
-  <b>Місто:</b> ${formData.city}
-  <b>Відділення:</b> ${formData.department}
+                const imgUrl = orderedProducts.map(product => 
+                  `${product.photo}`
+              )
 
-  <b>Замовлені товари:</b>
-  ${productsMessage}
+              console.log(imgUrl);
+              
 
-  <b>Загальна сума:</b> ${totalPrice} <i>грн ${formData.promo ? '(з урахуванням промокоду)' : ''}</i>
-  `;
 
-              const BOT_TOKEN = '7936445587:AAHV5lZ4RV6fW2w5vE75qfMRg27VUtuDDo0';
-              const CHAT_ID = '-1002442277202';
+                const message = `
+    <b>Нове замовлення!</b>
+    <b>Ім'я:</b> ${formData.name}
+    <b>Телефон:</b> ${formData.phone}
+    <b>Промокод:</b> ${formData.promo || 'Не вказано'}
+    <b>Спосіб доставки:</b> ${formData.deliveryType}
+    <b>Місто:</b> ${formData.city}
+    <b>Відділення:</b> ${formData.department}
+    
 
-              fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                  method: 'POST',
-                  headers: {
+
+    <b>Замовлені товари:</b>
+    
+    ${productsMessage}
+
+    <b>Загальна сума без знижки:</b> ${totalPrice} грн
+    <b>Загальна сума до сплати:</b> ${discountedPrice} <i>грн ${formData.promo ? '(з урахуванням промокоду)' : ''}</i>
+    `;
+
+                const BOT_TOKEN = '7936445587:AAHV5lZ4RV6fW2w5vE75qfMRg27VUtuDDo0';
+                const CHAT_ID = '-1002442277202';
+
+                imgUrl.forEach(function (url) {
+                  let imageUrl = 'https://raw.githubusercontent.com/Franchukkk/antik/refs/heads/master/docs/' +  url;
+
+
+                  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                    method: 'POST',
+                    headers: {
                       'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
+                    },
+                    body: JSON.stringify({
                       chat_id: CHAT_ID,
-                      text: message,
-                      parse_mode: 'HTML'
+                      photo: imageUrl,
+                    })
                   })
-              });
+                  .then(response => response.json())
+                  
+                  .catch(error => {
+                    console.error('Помилка:', error);
 
-              succsessfulOrder.classList.toggle('d-none');
+                  });
+                })
 
-              localStorage.clear();
+                setTimeout(function() {
+                  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                }, 1000)
 
-          }
-      })
-      // const feedbackOutOpenReadyPopup = document.querySelectorAll('.feedback-popup-open')
-      // const succsessfulFeedback = document.querySelector('.succsessful-feedback')
+                
 
-      // feedbackOutOpenReadyPopup.forEach(btn => {
-      //     btn.addEventListener('click', (e) => {
-      //         e.preventDefault()
-      //         succsessfulFeedback.classList.toggle('d-none')
-      //     })
-      // })
-  })
+
+                
+                
+
+
+                succsessfulOrder.classList.toggle('d-none');
+
+                localStorage.clear();
+
+            }
+        })
+        // const feedbackOutOpenReadyPopup = document.querySelectorAll('.feedback-popup-open')
+        // const succsessfulFeedback = document.querySelector('.succsessful-feedback')
+
+        // feedbackOutOpenReadyPopup.forEach(btn => {
+        //     btn.addEventListener('click', (e) => {
+        //         e.preventDefault()
+        //         succsessfulFeedback.classList.toggle('d-none')
+        //     })
+        // })
+    })
   
     const productsContainer = document.querySelector('#products');
     const basketContainer = document.querySelector('#productsInBasket');
@@ -312,34 +356,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+    function updateProducts () {
+      
+      Object.values(productsByCategory).flat().forEach(product => {
+          const productCard = `
+              <figure class="col-6 col-md-4 col-lg-3">
+                  <figcaption>
+                      <div class="figure-image">
+                          <img src="${product.images[0]}" alt="${product.name}">
+                          <a href="product-card.html" class="figure-to-card-page" data-product-id="${product.id}"></a>
+                      </div>
+                      <div class="card-text-block d-flex justify-content-between w-100">
+                          <a href="product-card.html" class="description-card" data-product-id="${product.id}">
+                              <p>${product.name}</p>
+                              <p class="price">${product.price} грн.</p>
+                          </a>
+                          <a href="#" data-value="${product.id}" class="card-btn al-center d-flex justify-content-center">
+                              <img src="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "img/tick.svg" : "img/cart.svg"}" alt="cart">
+                          </a>
+                      </div>
+                  </figcaption>
+              </figure>
+          `;
 
-    Object.values(productsByCategory).flat().forEach(product => {
-        const productCard = `
-            <figure class="col-6 col-md-4 col-lg-3">
-                <figcaption>
-                    <div class="figure-image">
-                        <img src="${product.images[0]}" alt="${product.name}">
-                        <a href="product-card.html" class="figure-to-card-page" data-product-id="${product.id}"></a>
-                    </div>
-                    <div class="card-text-block d-flex justify-content-between w-100">
-                        <a href="product-card.html" class="description-card" data-product-id="${product.id}">
-                            <p>${product.description}</p>
-                            <p class="price">${product.price} грн.</p>
-                        </a>
-                        <a href="#" data-value="${product.id}" class="card-btn al-center d-flex justify-content-center">
-                            <img src="img/cart.svg" alt="cart">
-                        </a>
-                    </div>
-                </figcaption>
-            </figure>
-        `;
 
-        if (productsContainer) {
-          productsContainer.insertAdjacentHTML('beforeend', productCard);
+  
+          if (productsContainer) {
+            productsContainer.insertAdjacentHTML('beforeend', productCard);
+  
+          }
+      });
+      
+    }
 
-        }
-    });
-
+    updateProducts()
 
 
 
@@ -461,7 +511,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                                 <div class="card-text-block d-flex justify-content-between w-100">
                                     <a href="product-card.html" class="description-card" data-product-id="${product.id}">
-                                        <p>${product.description}</p>
+                                        <p>${product.name}</p>
                                         <p class="price">${product.price} грн.</p>
                                     </a>
                                     <a href="#" onclick="removeFromBasket(${product.id})" class="card-btn al-center d-flex justify-content-center align-items-center">
@@ -486,11 +536,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     document.addEventListener('click', (e) => {
-        if (e.target.closest('.card-btn')) {
-            e.preventDefault();
-            const productId = parseInt(e.target.closest('.card-btn').dataset.value);
-            addToBasket(productId);
-        }
+                if (e.target.closest('.card-btn')) {
+                    e.preventDefault();
+
+                    e.target.closest('.card-btn').querySelector("img").src = "img/tick.svg"
+                    const productId = parseInt(e.target.closest('.card-btn').dataset.value);
+                    addToBasket(productId);
+                }
     
 
 
@@ -631,5 +683,12 @@ feedbackOutOpenReadyPopup.forEach(btn => {
   })
 
 
+
+  
+
+
+
+
+  
 
   
