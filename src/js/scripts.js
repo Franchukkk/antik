@@ -269,41 +269,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const BOT_TOKEN = '7936445587:AAHV5lZ4RV6fW2w5vE75qfMRg27VUtuDDo0';
                 const CHAT_ID = '-1002442277202';
-
-                imgUrl.forEach(function (url) {
-                  let imageUrl = 'https://raw.githubusercontent.com/Franchukkk/antik/refs/heads/master/docs/' +  url;
-
-
-                  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-                    method: 'POST',
-                    headers: {
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                  method: 'POST',
+                  headers: {
                       'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
+                  },
+                  body: JSON.stringify({
                       chat_id: CHAT_ID,
-                      photo: imageUrl,
-                    })
+                      text: message,
+                      parse_mode: 'HTML'
                   })
-                  .then(response => response.json())
-                  
-                  .catch(error => {
-                    console.error('Помилка:', error);
-
-                  });
-                })
+              });
+                
 
                 setTimeout(function() {
-                  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
+                  imgUrl.forEach(function (url) {
+                    let imageUrl = 'https://raw.githubusercontent.com/Franchukkk/antik/refs/heads/master/docs/' +  url;
+  
+  
+                    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                      method: 'POST',
+                      headers: {
                         'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
+                      },
+                      body: JSON.stringify({
                         chat_id: CHAT_ID,
-                        text: message,
-                        parse_mode: 'HTML'
+                        photo: imageUrl,
+                      })
                     })
-                });
+                    .then(response => response.json())
+                    
+                    .catch(error => {
+                      console.error('Помилка:', error);
+  
+                    });
+                  })
                 }, 1000)
 
                 
