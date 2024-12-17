@@ -358,7 +358,6 @@ p.price
         +media(400)
             border-radius: 0px 0px 30px 0px
         +media(769)
-            overflow-y: scroll
             height: 140rem
         +media(991)
             border-radius: 0px 0px 133px 0px
@@ -385,7 +384,6 @@ p.price
     section
         +media(768)
             height: 140rem
-            overflow-y: scroll
         +media(991)
             height: 171rem
     .image-block img
@@ -506,22 +504,27 @@ footer
     +media(450)
         font-size: 16rem
 
+// .buy-btn a, .buy-btn button
+//     display: inline-block
+//     width: 100%
+//     padding: 15px 10rem
+//     border-radius: 0px 15px 0px 0px
+//     background: #FF5E5E
+//     color: #000
+//     font-size: 10rem
+//     font-style: italic
+//     font-weight: 200
+//     text-align: center
+//     transition: all .3s ease
+//     border: none
+//     &:hover
+//         background: #ea4646
+//         transform: scale(1.02)
+
 .buy-btn a, .buy-btn button
-    display: inline-block
-    width: 100%
-    padding: 15px 10rem
-    border-radius: 0px 15px 0px 0px
-    background: #FF5E5E
-    color: #000
-    font-size: 10rem
-    font-style: italic
-    font-weight: 200
-    text-align: center
-    transition: all .3s ease
-    border: none
+    background-position-y: 100%
     &:hover
-        background: #ea4646
-        transform: scale(1.02)
+        transform: scale(1.05)
 
 div.product-card-info-description
     display: flex
@@ -583,10 +586,11 @@ div.product-card-info-description > div
 
 .basket-popup 
     position: fixed
+    display: none
     min-width: 300px
     width: 100%
     height: 100vh
-    top: -200%
+    top: 0
     left: 0
     overflow-y: scroll 
     z-index: 20
@@ -597,7 +601,7 @@ div.product-card-info-description > div
     display: none
 
 .basket-popup.basket-active
-    top: 0
+    display: block
     .basket-footer
         display: block
 
@@ -640,11 +644,7 @@ div.product-card-info-description > div
         border-radius: 15px 0px 0px 0px
     background: #F4D469
     z-index: 2
-    a
-        width: auto
-        border-radius: 15px 15px 0px 0px
-        +media(400)
-            border-radius: 15px 0px 0px 0px
+
 
 .cross
     background-color: #F4D469
