@@ -8,6 +8,8 @@
 
 html
     font-size: 3px
+    +media(335)
+        font-size: 3.3px
     +media(510)
         font-size: 4px
     +media(2000)
@@ -27,6 +29,8 @@ a
 
 li
     list-style: none
+
+
 
 .wrapper
     max-width: 300rem
@@ -167,20 +171,28 @@ ul
     color: rgba(0, 0, 0, 0.70)
     font-size: 4rem
     font-style: italic
-    font-weight: 100
-    border-radius: 0 0 0 23px
+    font-weight: 400
+    border-radius: 5rem 0 0 5rem
     padding: 3rem 7rem
     border: none
     outline: none
+    +media(400)
+        border-radius: 0 0 0 23px
+
     & + button
         color: #000
         font-size: 4rem
         padding: 0 5rem
         font-style: italic
         font-weight: 100
-        border-radius: 0px 23px 0 0
+        border-radius: 0px 23px 23px 0
+        +media(400)
+            border-radius: 0px 23px 0 0
         border: none
         outline: none
+
+.search::placeholder
+    font-weight: 100
 
 .products
     margin-bottom: 3rem
@@ -190,7 +202,7 @@ ul
     max-width: 72.5rem
     overflow: hidden
     transition: all .5s ease
-    
+
     &:hover
         transform: scale(1.05)
         
@@ -230,10 +242,15 @@ ul
     padding: 0 5px
 
 .products figcaption > .figure-image img
-    height: 70rem
     width: 100%
+    aspect-ratio: 5 / 7
     object-fit: cover
-    border-radius: 15px 0px 0px 0px
+    border-radius: 15px 15px 0 0
+    +media(400)
+        border-radius: 15px 0px 0px 0px
+    display: block
+
+
 
 .card-text-block
     background-color: #fff
@@ -261,17 +278,20 @@ p.price
     border-radius: 15px 0px 0px 0px
     background: #F4D469
     img
+        object-fit: contain
         width: 10rem
         transition: all .3s ease
     &:hover img
         transform: scale(1.2)
 .category
     padding: 0
-    border-radius: 7.8rem 0px
+    border-radius: 7.8rem
     background: linear-gradient(180deg, #F4D469 0%, #F4D469 80%,  #A7825D 100%)
     background-size: 100% 500%
     background-position: 0
     transition: all .3s ease
+    +media(400)
+        border-radius: 7.8rem 0px
     &:hover
         background-position-y: 100%
     img
@@ -279,8 +299,10 @@ p.price
         height: 52.5rem
         width: 95%
         object-fit: cover
-        border-radius: 7.5rem 0px 0px 0px
+        border-radius: 7.5rem
         margin-right: 5rem
+        +media(400)
+            border-radius: 7.5rem 0px 0px 0px
     p
         color: #000
         font-size: 12rem
@@ -328,12 +350,16 @@ p.price
         margin-bottom: 5rem
 
     section
-        height: 140rem
-        overflow-y: scroll
+        
         padding: 10rem 5rem 10rem 10rem
-        border-radius: 0px 0px 30px 0px
+        border-radius: 7.5rem
         background: linear-gradient(180deg, #F4D469 1.24%, #A7825D 100%)
         margin-bottom: 10rem
+        +media(400)
+            border-radius: 0px 0px 30px 0px
+        +media(769)
+            overflow-y: scroll
+            height: 140rem
         +media(991)
             border-radius: 0px 0px 133px 0px
         .scroll
@@ -357,8 +383,9 @@ p.price
             height: 225rem
 .nova-section 
     section
-        height: 140rem
-        overflow-y: scroll
+        +media(768)
+            height: 140rem
+            overflow-y: scroll
         +media(991)
             height: 171rem
     .image-block img
@@ -376,7 +403,7 @@ p.price
         margin-bottom: 7rem
         margin: 0 auto
         margin-bottom: 10rem
-        +media(360)
+        +media(380)
             max-width: 113rem
     a
         font-size: 10rem
@@ -394,7 +421,9 @@ img.image-block--img
     margin-bottom: 10rem
 
 .aboutus-text:last-child
-    border-radius: 30px 0px 0px 0px
+    border-radius: 7.5rem
+    +media(400)
+        border-radius: 30px 0px 0px 0px
     +media(991)
         border-radius: 72px 0px 0px 0px
 
@@ -411,13 +440,17 @@ img.image-block--img
     form
         width: 100%
         padding: 13.5rem
-        border-radius: 12.5rem 0px
+        border-radius: 12.5rem
+        +media(400)
+            border-radius: 12.5rem 0px
         background: linear-gradient(to bottom, rgba(244, 212, 105, 0.64) 0%, #A7825D 88.18%)
 
         input:not(input[type='radio'])
             display: block
             width: 100%
-            border-radius: 0px 6rem
+            border-radius: 3rem
+            +media(400)
+                border-radius: 0px 6rem
             margin-bottom: 3rem
 
 .form-btn
@@ -448,23 +481,22 @@ footer
     background-color: #fff
 
 .product-card-info-img > div > img
+    display: block
+    margin: 0 auto
     width: 100%
-    height: 100rem
+    aspect-ratio: 5 / 7
     object-fit: cover
     margin-bottom: 1rem
-    +media(991)
-        height: 80rem
 
 .next-images-line img
-    height: 35rem
     width: 100%
+    aspect-ratio: 5 / 7
     object-fit: cover
     cursor: pointer
     transition: all .3s ease
     &:hover
         transform: scale(1.1)
-    +media(991)
-        height: 26rem
+
 
 .product-price
     color: #000
@@ -494,6 +526,7 @@ footer
 div.product-card-info-description
     display: flex
     align-items: stretch
+    flex-wrap: wrap
     padding: 7rem 0
     +media(991)
         padding: 0 7rem
@@ -515,9 +548,13 @@ div.product-card-info-description
 div.product-card-info-description > div
     width: 100%
     overflow-y: scroll
+    height: calc(70% - 5rem)
     padding:  4rem 2rem
-    border-radius: 7.5rem 0px
+    border-radius: 7.5rem
+    +media(400)
+        border-radius: 7.5rem 0px
     background: linear-gradient(180deg, #F4D469 0%, #AA855E 100%)
+    margin-bottom: 5rem
     &::-webkit-scrollbar
         width: 5px
     &::-webkit-scrollbar-track
@@ -528,6 +565,9 @@ div.product-card-info-description > div
         border-radius: 10px
     +media(991)
         padding:  4rem 9rem
+
+.product-card-info-description .buy-description
+    height: 30%
 
 
 .categories-main
@@ -566,8 +606,10 @@ div.product-card-info-description > div
     margin-bottom: 150px
 
 .basket-header
-    border-radius: 0px 0px 0px 15px
-    background: linear-gradient(175deg, #F4D469 23.11%, #E7C667 34.03%, #A7825D 87.35%)
+    border-radius: 0px 0px 15px 15px
+    +media(400)
+        border-radius: 0px 0px 0px 15px
+    background: #F4D469
     margin-bottom: 8rem
 
 .basket-popup 
@@ -587,20 +629,22 @@ div.product-card-info-description > div
 .figure-basket
     max-width: 100% !important
     width: 100%
-    .figure-image img
-        height: 30rem
 
 .basket-footer
     position: fixed
     width: 100%
     bottom: 0
     left: 0
-    border-radius: 15px 0px 0px 0px
-    background: linear-gradient(175deg, #F4D469 23.11%, #E7C667 34.03%, #A7825D 87.35%)
+    border-radius: 15px 15px 0px 0px
+    +media(400)
+        border-radius: 15px 0px 0px 0px
+    background: #F4D469
     z-index: 2
     a
         width: auto
-        border-radius: 15px 0px 0px 0px
+        border-radius: 15px 15px 0px 0px
+        +media(400)
+            border-radius: 15px 0px 0px 0px
 
 .cross
     background-color: #F4D469
@@ -661,7 +705,9 @@ input[type="radio"]:checked
     width: 100%
 
 .buy-description
-    border-radius: 0px 30px 0px 0px
+    border-radius: 25px
+    +media(400)
+        border-radius: 0px 30px 0px 0px
     background: linear-gradient(90deg, #F4D469 0%, #AD885F 100%)
     p
         color: #000
@@ -680,15 +726,19 @@ input[type="radio"]:checked
     top: 50%
     left: 50%
     width: 70vw
+    max-width: 185rem
     min-width: 310px
     transform:  translate(-50%, -50%)
     z-index: 100
-    border-radius: 12.5rem 0px
+    border-radius: 12.5rem
+    +media(400)
+        border-radius: 12.5rem 0px
     background: linear-gradient(270deg, #F4D469 0%, #A7825D 100%)
     text-align: center
     padding: 10rem
     +media(860)
         width: 50vw
+
     p
         color: #000
         font-size: 6rem
@@ -707,3 +757,16 @@ input[type="radio"]:checked
 
 #productsCategory
     margin-bottom: 30rem
+
+.scroll
+    overflow-y: hidden
+    +media(768)
+        overflow-y: scroll
+.mobile-hidden
+    display: none
+    +media(768)
+        display: block
+
+.read-more-btn
+    margin-top: 3rem
+

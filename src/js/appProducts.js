@@ -13,11 +13,12 @@ const products = [
         "description": "Елегантний секретер XIX століття з червоного дерева, з потайними шухлядами та оригінальною фурнітурою.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Electronics",
-        "price": 150
+        "price": 150,
+        "rating": 1,
     },
     {
         "id": 3,
-        "name": "Старовинний настінний годинник",
+        "name": "Старовинний годинник",
         "description": "Настінний годинник епохи модерн з ручним розписом та позолоченим маятником, виготовлений у Відні.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Clocks",
@@ -61,7 +62,8 @@ const products = [
         "description": "Китайська порцелянова ваза династії Цін з традиційним розписом та печаткою майстра.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Dishes",
-        "price": 450
+        "price": 450,
+        "rating": 1,
     },
     {
         "id": 9,

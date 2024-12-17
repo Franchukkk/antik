@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>${product.name}</p>
                 <p class="price">${product.price} грн.</p>
               </a>
-              <a href="#" data-value="${product.id}" class="card-btn al-center d-flex justify-content-center">
+              <a href="#" data-value="${product.id}" class="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "cart-open-btn" : ""} card-btn al-center d-flex justify-content-center">
                 <img src="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "img/tick.svg" : "img/cart.svg"}" alt="cart">
               </a>
             </div>
@@ -357,8 +357,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function updateProducts () {
+      const sortedProducts = [];
       
+      // First add products with rating 1
       Object.values(productsByCategory).flat().forEach(product => {
+          if (product.rating === 1) {
+              sortedProducts.push(product);
+          }
+      });
+      
+      // Then add remaining products
+      Object.values(productsByCategory).flat().forEach(product => {
+          if (product.rating !== 1) {
+              sortedProducts.push(product);
+          }
+      });
+      
+      sortedProducts.forEach(product => {
           const productCard = `
               <figure class="col-6 col-md-4 col-lg-3">
                   <figcaption>
@@ -371,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
                               <p>${product.name}</p>
                               <p class="price">${product.price} грн.</p>
                           </a>
-                          <a href="#" data-value="${product.id}" class="card-btn al-center d-flex justify-content-center">
+                          <a href="#" data-value="${product.id}" class="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "cart-open-btn" : ""} card-btn al-center d-flex justify-content-center">
                               <img src="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "img/tick.svg" : "img/cart.svg"}" alt="cart">
                           </a>
                       </div>
@@ -379,18 +394,13 @@ document.addEventListener('DOMContentLoaded', () => {
               </figure>
           `;
 
-
-  
           if (productsContainer) {
             productsContainer.insertAdjacentHTML('beforeend', productCard);
-  
           }
       });
-      
     }
 
     updateProducts()
-
 
 
 
@@ -538,9 +548,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
                 if (e.target.closest('.card-btn')) {
                     e.preventDefault();
+                    e.target.closest('.card-btn').classList.add("cart-open-btn");
 
                     e.target.closest('.card-btn').querySelector("img").src = "img/tick.svg"
                     const productId = parseInt(e.target.closest('.card-btn').dataset.value);
+                    const cartOpenBtns = document.querySelectorAll('.cart-open-btn');
+                    const basketPopup = document.querySelector('.basket-popup-js');
+
+                    cartOpenBtns.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            basketPopup.classList.toggle('basket-active');
+                        });
+                    });
                     addToBasket(productId);
                 }
     
@@ -587,22 +606,23 @@ document.addEventListener('DOMContentLoaded', () => {
 const promoInput = document.querySelector('input[name="userPromo"]');
 
 
-
-promoInput.addEventListener('change', (e) => {
-    const enteredPromo = e.target.value;
-    const foundPromo = promos.find(p => p.promo === enteredPromo);
-    const priceElement = document.querySelector('#allPriceWithPromo');
-    const currentPrice = parseInt(priceElement.textContent);
+  promoInput.addEventListener('input', (e) => {
+      const enteredPromo = e.target.value;
+      const foundPromo = promos.find(p => p.promo === enteredPromo);
+      const priceElement = document.querySelector('#allPriceWithPromo');
+      const currentPrice = parseInt(priceElement.textContent);
     
-    if (foundPromo && currentPrice) {
-        const discountAmount = currentPrice * (foundPromo.discount / 100);
-        const newPrice = currentPrice - discountAmount;
-        priceElement.textContent = `${Math.round(newPrice)}грн.`;
-        localStorage.setItem('promo', enteredPromo);
-    } else {
-        priceElement.textContent = document.querySelector('#totalPrice').textContent;
-    }
-});
+      if (foundPromo && currentPrice) {
+          const discountAmount = currentPrice * (foundPromo.discount / 100);
+          const newPrice = currentPrice - discountAmount;
+          priceElement.textContent = `${Math.round(newPrice)}грн.`;
+          document.querySelector("#isPromoUsed").textContent = "Промокод (застосовано)"
+          localStorage.setItem('promo', enteredPromo);
+      } else {
+          priceElement.textContent = document.querySelector('#totalPrice').textContent;
+          document.querySelector("#isPromoUsed").textContent = "Промокод"
+      }
+  });
 
 
 
@@ -673,7 +693,7 @@ feedbackOutOpenReadyPopup.forEach(btn => {
 })
 
 
-  const categoryLinks = document.querySelectorAll('.category-block')
+  const categoryLinks = document.querySelectorAll('.category-link')
 
   categoryLinks.forEach(link => {
       link.addEventListener('click', (e) => {
@@ -690,5 +710,12 @@ feedbackOutOpenReadyPopup.forEach(btn => {
 
 
   
+    const readMoreBtns = document.querySelectorAll('.read-more-btn')
+    const mobileHiddenContents = document.querySelectorAll('.mobile-hidden')
 
-  
+    readMoreBtns.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            mobileHiddenContents[index].classList.toggle('mobile-hidden')
+            btn.textContent = mobileHiddenContents[index].classList.contains('mobile-hidden') ? 'Читати далі' : 'Згорнути'
+        })
+    })

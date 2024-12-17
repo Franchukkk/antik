@@ -2,25 +2,26 @@ footer.d-flex.justify-content-center
     .footer-list
         ul
             li
-                a(href="") Категорії товару
+                a(href="#categories") Категорії товару
             li
-                a(href="") Про нас
+                a(href="#aboutus") Про нас
             li
-                a(href="") Зв’язатись із нами
+                a(href="#form") Зв’язатись із нами
         ul
             li
-                a(href="") Кошик
-            li
-                a(href="") Обрані товари
+                a(href="" onclick="event.preventDefault()").cart-open-btn Кошик
+
     
     ul
         li
-            a(href="") Посуд
+            a(href="category.html" data-value="Electronics").category-link Електроніка
         li
-            a(href="") Годинники
+            a(href="category.html" data-value="Clocks").category-link Годинники
         li
-            a(href="") Статуетки, моделі
+            a(href="category.html" data-value="Dishes").category-link Посуд
         li
-            a(href="") Мистецтво
+            a(href="category.html" data-value="Models").category-link Статуетки, моделі
         li
-            a(href="") Інше
+            a(href="category.html" data-value="Art").category-link Мистецтво
+        li
+            a(href="category.html" data-value="Other").category-link Інше
