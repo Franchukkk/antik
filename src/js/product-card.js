@@ -32,20 +32,23 @@ if (window.location.pathname.includes('product-card.html')) {
       const addToCartBtn = document.querySelector('.card-btns .button')
       addToCartBtn.addEventListener('click', function() {
         event.preventDefault();
+        if (addToCartBtn.innerHTML == "В кошику") {
+            document.querySelector('.basket-popup-js').classList.toggle('basket-active');
+        }
       })
       const basketProducts = JSON.parse(localStorage.getItem("basketProducts") || '[]')
       if (basketProducts.includes(selectedProduct.id)) {
         addToCartBtn.innerHTML = "В кошику";
-        addToCartBtn.classList.add("cart-open-btn")
+        // addToCartBtn.classList.add("cart-open-btn")
       } else {
           addToCartBtn.setAttribute('data-value', selectedProduct.id)
 
           addToCartBtn.addEventListener('click', function() {
             const productId = Number(this.getAttribute('data-value'))
             addToBasket(productId)
-            addToCartBtn.innerHTML = "У кошику";
-            addToCartBtn.classList.add("cart-open-btn")
-            document.querySelector('.basket-popup-js').classList.toggle('basket-active');
+            addToCartBtn.innerHTML = "В кошику";
+            // addToCartBtn.classList.add("cart-open-btn")
+            
           })
       }      
       // Add click event listener to cart button

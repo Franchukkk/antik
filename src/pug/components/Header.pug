@@ -17,8 +17,9 @@ header
                         a(href="index.html#form" data-section="form") Зв'язок
                     
                 ul.d-flex
-                    a(href="#").cart.d-flex.align-items-center.cart-open-btn#cartUpdate
+                    a(href="#").cart.d-flex.align-items-center.cart-open-btn#cartUpdate.relative
                         img(src="img/cart.svg", alt="")
+                        .triangle
 
 .basket-popup.check-out-popup-js
     .basket-header
@@ -30,7 +31,7 @@ header
         .contact-form.contact-form-popup
             form(action="")#checkOutForm
                 label(for="userName") 
-                    p Ім'я
+                    p Ім'я та прізвище
 
                 input(type="text", name="userName" placeholder="Написати..." required).search
                 label(for="userName") 

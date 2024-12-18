@@ -1,3 +1,6 @@
+if (JSON.parse(localStorage.getItem('basketProducts') || '[]').length > 0) {
+  document.querySelector(".triangle").style.transform = "scale(1)";
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const selectedCategory = localStorage.getItem('selectedCategory');
@@ -442,12 +445,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function addToBasket(productId) {
+        document.querySelector(".triangle").style.transform = "scale(0)";
         let basketProducts = JSON.parse(localStorage.getItem('basketProducts')) || [];
         if (!basketProducts.includes(productId)) {
             basketProducts.push(productId);
             localStorage.setItem('basketProducts', JSON.stringify(basketProducts));
         }
         updateBasket();
+        setTimeout(() => {
+            document.querySelector(".triangle").style.transform = "scale(1)";
+        }, 100);
+
     }
 
 
@@ -491,6 +499,7 @@ document.addEventListener('DOMContentLoaded', () => {
             basketContainer.innerHTML = '<h2>Кошик пустий</h2>';
             totalPriceContainer.textContent = 'Кошик пустий';
             checkoutBtn.disabled = true;
+            document.querySelector(".triangle").style.transform = "scale(0)";
             return;
         }
     
