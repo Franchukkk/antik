@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(".categories-main h1").innerHTML = categoriesUkr[selectedCategory]
     const filteredProducts = products
       .filter(product => product.category === selectedCategory)
-      .sort((a, b) => (b.rating === 1) - (a.rating === 1));
+      // .sort((a, b) => (b.rating === 1) - (a.rating === 1));
     
     console.log(productsCategoryContainer);
     filteredProducts.forEach(product => {
@@ -377,17 +377,15 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // First add products with rating 1
       Object.values(productsByCategory).flat().forEach(product => {
-          if (product.rating === 1) {
-              sortedProducts.push(product);
-          }
+        sortedProducts.push(product);
       });
       
       // Then add remaining products
-      Object.values(productsByCategory).flat().forEach(product => {
-          if (product.rating !== 1) {
-              sortedProducts.push(product);
-          }
-      });
+      // Object.values(productsByCategory).flat().forEach(product => {
+      //     if (product.rating !== 1) {
+      //         sortedProducts.push(product);
+      //     }
+      // });
       
       sortedProducts.forEach(product => {
           const productCard = `

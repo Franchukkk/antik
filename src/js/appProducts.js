@@ -167,7 +167,7 @@ const products = [
         "description": "Кишеньковий годинник 1850-х років з золотим корпусом та складним механізмом.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Other",
-        "initiallPrice": 800,
+        "initiallPrice": 80,
         "price": 1000,
     },
     {
@@ -181,10 +181,7 @@ const products = [
     }
 ].map(product => {
     const priceDifference = ((product.price - product.initiallPrice) / product.initiallPrice) * 100;
-    if (priceDifference >= 15) {
-        return { ...product, rating: 1 };
-    }
-    return product;
-});
+    return { ...product, priceDifference };
+}).sort((a, b) => b.priceDifference - a.priceDifference);
 
 console.log(products);

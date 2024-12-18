@@ -313,7 +313,9 @@ p.price
         font-style: italic
         font-weight: 100
         min-height: 36rem
-        padding-left: 5rem
+        padding-left: 10rem
+        +media(400)
+            padding-left: 5rem
         +media(550)
             font-size: 12rem
         +media(769)
@@ -329,7 +331,9 @@ p.price
     text-align: left
     
     img
-        margin: 5.75rem auto
+        margin: 5.75rem 4.9rem
+        +media(400)
+            margin: 5.75rem auto
         +media(769)
             margin: 0 5.75rem 0 -1rem
 
