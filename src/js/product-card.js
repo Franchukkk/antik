@@ -64,10 +64,10 @@ if (window.location.pathname.includes('product-card.html')) {
             <figcaption>
               <div class="figure-image">
                 <img src="${product.images[0]}" alt="">
-                <a class="figure-to-card-page" href="product-card.html" onclick="localStorage.setItem('selectedProduct', JSON.stringify(${JSON.stringify(product)}))"></a>
+                <a class="figure-to-card-page" href="product-card.html" data-product-id="${product.id}"></a>
               </div>
               <div class="card-text-block d-flex justify-content-between w-100">
-                <a class="description-card" href="product-card.html" onclick="localStorage.setItem('selectedProduct', JSON.stringify(${JSON.stringify(product)}))">
+                <a class="description-card" href="product-card.html" data-product-id="${product.id}">
                   <p>${product.name}</p>
                   <p class="price">${product.price} грн.</p>
                 </a>

@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
       'Other': 'Інше',
     }
     document.querySelector(".categories-main h1").innerHTML = categoriesUkr[selectedCategory]
-    const filteredProducts = products.filter(product => product.category === selectedCategory);
+    const filteredProducts = products
+      .filter(product => product.category === selectedCategory)
+      .sort((a, b) => (b.rating === 1) - (a.rating === 1));
+    
     console.log(productsCategoryContainer);
     filteredProducts.forEach(product => {
       const productCard = `
@@ -49,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 })
-
       
 
 
@@ -173,7 +175,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const heightJsBlockCard = document.querySelector('#heightJsBlockCard');
     const takeJsHeight = document.querySelector('#takeJsHeight');
     if (heightJsBlockCard) {
-      heightJsBlockCard.style.height = takeJsHeight.getBoundingClientRect().height + "px";
+      if (window.innerWidth >= 991) {
+        heightJsBlockCard.style.height = takeJsHeight.getBoundingClientRect().height + "px";
+
+      }
 
     }
 });

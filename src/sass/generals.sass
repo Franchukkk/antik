@@ -81,6 +81,9 @@ ul
     &:hover
         background-position-y: 100%
 
+.header-sm-popup ul li a
+    font-weight: 300
+
 .header-line ul li.active a
     background-position-y: 100%
 
@@ -88,7 +91,7 @@ ul
     position: relative
     display: inline-block
     width: 8rem
-    height: 0.2rem
+    height: 1.1px
     background-color: #000
     z-index: 20
     transition: all .3s ease
@@ -97,7 +100,7 @@ ul
         position: absolute
         display: inline-block
         width: 8rem
-        height: 0.2rem
+        height: 1.1px
         background-color: #000
         top: -2rem
         z-index: 20
@@ -107,7 +110,7 @@ ul
         position: absolute
         display: inline-block
         width: 8rem
-        height: 0.2rem
+        height: 1.1px
         background-color: #000
         top: 2rem
         transition: all .3s ease
@@ -243,7 +246,7 @@ ul
 
 .products figcaption > .figure-image img
     width: 100%
-    aspect-ratio: 5 / 7
+    aspect-ratio: 4 / 5
     object-fit: cover
     border-radius: 15px 15px 0 0
     +media(400)
@@ -296,8 +299,9 @@ p.price
         background-position-y: 100%
     img
         display: block
-        height: 52.5rem
+        // height: 52.5rem
         width: 95%
+        aspect-ratio: 1 / 1
         object-fit: cover
         border-radius: 7.5rem
         margin-right: 5rem
@@ -305,11 +309,13 @@ p.price
             border-radius: 7.5rem 0px 0px 0px
     p
         color: #000
-        font-size: 12rem
+        font-size: 9rem
         font-style: italic
         font-weight: 100
         min-height: 36rem
         padding-left: 5rem
+        +media(550)
+            font-size: 12rem
         +media(769)
             min-height: auto
 
@@ -364,8 +370,9 @@ p.price
         .scroll
             width: 100%
             height: 100%
-            overflow-y: scroll
             padding-right: 10rem
+            +media(4000)
+                overflow-y: scroll
             &::-webkit-scrollbar
                 width: 5px
             &::-webkit-scrollbar-track
@@ -482,13 +489,13 @@ footer
     display: block
     margin: 0 auto
     width: 100%
-    aspect-ratio: 5 / 7
+    aspect-ratio: 4 / 5
     object-fit: cover
     margin-bottom: 1rem
 
 .next-images-line img
     width: 100%
-    aspect-ratio: 5 / 7
+    aspect-ratio: 4 / 5
     object-fit: cover
     cursor: pointer
     transition: all .3s ease
@@ -521,6 +528,13 @@ footer
 //         background: #ea4646
 //         transform: scale(1.02)
 
+.basket-footer a,.basket-footer button
+    font-weight: 300
+    background: #FF5E5E
+    &:hover
+        background: #ea4646
+        transform: scale(1.02)
+
 .buy-btn a, .buy-btn button
     background-position-y: 100%
     &:hover
@@ -551,7 +565,10 @@ div.product-card-info-description
 div.product-card-info-description > div
     width: 100%
     overflow-y: scroll
-    height: calc(70% - 5rem)
+    max-height: 320px
+    +media(991)
+        max-height: calc(70% - 5rem)
+        height: calc(70% - 5rem)
     padding:  4rem 2rem
     border-radius: 7.5rem
     +media(400)
@@ -570,7 +587,8 @@ div.product-card-info-description > div
         padding:  4rem 9rem
 
 .product-card-info-description .buy-description
-    height: 30%
+    +media(991)
+        height: 30%
 
 
 .categories-main
@@ -770,3 +788,7 @@ input[type="radio"]:checked
 .read-more-btn
     margin-top: 3rem
 
+
+img[src="img/cross.svg"]
+    width: 100%
+    aspect-ratio: 1 / 1

@@ -54,4 +54,8 @@ function searchProducts(searchInput) {
 
 console.log(localStorage.getItem("searchedProduct"));
 
-searchProducts(localStorage.getItem("searchedProduct"));
+if (document.querySelector('#searchedProducts')) {
+    searchProducts(localStorage.getItem("searchedProduct"));
+    
+}
+

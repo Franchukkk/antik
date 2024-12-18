@@ -5,7 +5,8 @@ const products = [
         "description": "Рідкісний грамофон 1920-х років з бронзовим рупором та механізмом ручного заводу. Чудово збережений стан.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Electronics",
-        "price": 100
+        "initiallPrice": 90,
+        "price": 100,
     },
     {
         "id": 2,
@@ -13,8 +14,8 @@ const products = [
         "description": "Елегантний секретер XIX століття з червоного дерева, з потайними шухлядами та оригінальною фурнітурою.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Electronics",
+        "initiallPrice": 90,
         "price": 150,
-        "rating": 1,
     },
     {
         "id": 3,
@@ -22,6 +23,7 @@ const products = [
         "description": "Настінний годинник епохи модерн з ручним розписом та позолоченим маятником, виготовлений у Відні.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Clocks",
+        "initiallPrice": 190,
         "price": 200
     },
     {
@@ -30,7 +32,8 @@ const products = [
         "description": "Порцеляновий чайник кінця XIX століття з ручним розписом та золотим декором.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Clocks",
-        "price": 250
+        "initiallPrice": 180,
+        "price": 250,
     },
     {
         "id": 5,
@@ -38,6 +41,7 @@ const products = [
         "description": "Вишуканий п'ятисвічковий канделябр XVIII століття, прикрашений рельєфними орнаментами.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Clocks",
+        "initiallPrice": 290,
         "price": 300
     },
     {
@@ -46,6 +50,7 @@ const products = [
         "description": "Венеціанське дзеркало XIX століття в позолоченій рамі з ручним різьбленням.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Clocks",
+        "initiallPrice": 320,
         "price": 350
     },
     {
@@ -54,7 +59,8 @@ const products = [
         "description": "Колекційний сервіз Мейсенської мануфактури на 12 персон з унікальним квітковим орнаментом.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Dishes",
-        "price": 400
+        "initiallPrice": 300,
+        "price": 400,
     },
     {
         "id": 8,
@@ -62,8 +68,8 @@ const products = [
         "description": "Китайська порцелянова ваза династії Цін з традиційним розписом та печаткою майстра.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Dishes",
+        "initiallPrice": 350,
         "price": 450,
-        "rating": 1,
     },
     {
         "id": 9,
@@ -71,7 +77,8 @@ const products = [
         "description": "Розкішний столовий набір 1890-х років, виготовлений зі срібла 925 проби з гравіруванням.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Dishes",
-        "price": 500
+        "initiallPrice": 400,
+        "price": 500,
     },
     {
         "id": 10,
@@ -79,6 +86,7 @@ const products = [
         "description": "Мідний самовар 1880 року виробництва тульських майстрів з оригінальними клеймами.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Dishes",
+        "initiallPrice": 540,
         "price": 550
     },
     {
@@ -87,6 +95,7 @@ const products = [
         "description": "Настільний глобус 1920-х років на дерев'яній підставці з латунними елементами.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Models",
+        "initiallPrice": 595,
         "price": 600
     },
     {
@@ -94,7 +103,8 @@ const products = [
         "name": "Антикварна картина",
         "description": "Олійний живопис XIX століття в оригінальній позолоченій рамі, пейзаж невідомого майстра.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
-        "category": "Art",
+        "category": "Models",
+        "initiallPrice": 600,
         "price": 650
     },
     {
@@ -103,7 +113,8 @@ const products = [
         "description": "Бронзова скульптура початку XX століття, підписана відомим французьким майстром.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Art",
-        "price": 700
+        "initiallPrice": 600,
+        "price": 700,
     },
     {
         "id": 14,
@@ -111,7 +122,8 @@ const products = [
         "description": "Ручної роботи гобелен кінця XIX століття з зображенням міфологічних сцен.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Art",
-        "price": 750
+        "initiallPrice": 600,
+        "price": 750,
     },
     {
         "id": 15,
@@ -119,7 +131,8 @@ const products = [
         "description": "Православна ікона XVIII століття, писана на дереві темперними фарбами.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Art",
-        "price": 800
+        "initiallPrice": 700,
+        "price": 800,
     },
     {
         "id": 16,
@@ -127,6 +140,7 @@ const products = [
         "description": "Настільний телефонний апарат початку XX століття з латуні та бакеліту.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Electronics",
+        "initiallPrice": 800,
         "price": 850
     },
     {
@@ -135,7 +149,8 @@ const products = [
         "description": "Морський компас XIX століття в латунному корпусі з оригінальним футляром.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Other",
-        "price": 900
+        "initiallPrice": 750,
+        "price": 900,
     },
     {
         "id": 18,
@@ -143,6 +158,7 @@ const products = [
         "description": "Дерев'яна шкатулка XVIII століття з інкрустацією перламутром та потайним механізмом.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Other",
+        "initiallPrice": 900,
         "price": 950
     },
     {
@@ -151,7 +167,8 @@ const products = [
         "description": "Кишеньковий годинник 1850-х років з золотим корпусом та складним механізмом.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Other",
-        "price": 1000
+        "initiallPrice": 800,
+        "price": 1000,
     },
     {
         "id": 20,
@@ -159,6 +176,15 @@ const products = [
         "description": "Срібний підсвічник XVII століття з гербом аристократичної родини.",
         "images": ["img/product-card-image.jpeg", "img/product-card-image2.jpeg", "img/product-card-image3.jpeg", "img/product-card-image4.jpeg"],
         "category": "Other",
+        "initiallPrice": 1000,
         "price": 1050
     }
-  ];
+].map(product => {
+    const priceDifference = ((product.price - product.initiallPrice) / product.initiallPrice) * 100;
+    if (priceDifference >= 15) {
+        return { ...product, rating: 1 };
+    }
+    return product;
+});
+
+console.log(products);
