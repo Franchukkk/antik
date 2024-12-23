@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1,
+        "name": "раритетний чайник",
+        "description": "раритетний чайник це дуже крутий чайник",
+        "images": [
+            "..\/img\/Новий проєкт-7.jpg",
+            "..\/img\/Новий проєкт-3.jpg",
+            "..\/img\/(Grupo)1-2.png",
+            "..\/img\/aboutus.jpg"
+        ],
+        "category": "Electronics",
+        "initiallPrice": 100,
+        "price": 400
+    },
+    {
+        "id": 2,
+        "name": "старовинний годинник",
+        "description": "унікальний настінний годинник 19 століття",
+        "images": [
+            "..\/img\/Новий проєкт-7.jpg",
+            "..\/img\/Новий проєкт-3.jpg",
+            "..\/img\/(Grupo)1-2.png",
+            "..\/img\/aboutus.jpg"
+        ],
+        "category": "Clocks",
+        "initiallPrice": 200,
+        "price": 800
+    },
+    {
+        "id": 3,
+        "name": "порцеляновий сервіз",
+        "description": "колекційний порцеляновий сервіз ручної роботи",
+        "images": [
+            "..\/img\/Новий проєкт-7.jpg",
+            "..\/img\/Новий проєкт-3.jpg",
+            "..\/img\/(Grupo)1-2.png",
+            "..\/img\/aboutus.jpg"
+        ],
+        "category": "Dishes",
+        "initiallPrice": 300,
+        "price": 1200
+    },
+    {
+        "id": 4,
+        "name": "модель вітрильника",
+        "description": "дерев'яна модель старовинного вітрильника",
+        "images": [
+            "..\/img\/Новий проєкт-7.jpg",
+            "..\/img\/Новий проєкт-3.jpg",
+            "..\/img\/(Grupo)1-2.png",
+            "..\/img\/aboutus.jpg"
+        ],
+        "category": "Models",
+        "initiallPrice": 150,
+        "price": 6000
+    },
+    {
+        "id": 5,
+        "name": "картина маслом",
+        "description": "антикварна картина маслом 20 століття",
+        "images": [
+            "..\/img\/Новий проєкт-7.jpg",
+            "..\/img\/Новий проєкт-3.jpg",
+            "..\/img\/(Grupo)1-2.png",
+            "..\/img\/aboutus.jpg"
+        ],
+        "category": "Art",
+        "initiallPrice": 500,
+        "price": 2000
+    },
+    {
+        "id": 6,
+        "name": "старовинна скринька",
+        "description": "дерев'яна різьблена скринька 19 століття",
+        "images": [
+            "..\/img\/Новий проєкт-7.jpg",
+            "..\/img\/Новий проєкт-3.jpg",
+            "..\/img\/(Grupo)1-2.png",
+            "..\/img\/aboutus.jpg"
+        ],
+        "category": "Other",
+        "initiallPrice": 250,
+        "price": 1000
+    }
+]

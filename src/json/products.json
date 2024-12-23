@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "432",
+        "description": "234",
+        "images": [
+            "eq",
+            "wer",
+            "rwe",
+            "erw"
+        ],
+        "category": "Electronics",
+        "initiallPrice": 123,
+        "price": 213
+    }
+]

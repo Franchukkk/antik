@@ -76,6 +76,28 @@ export const js = () => {
     }))
 }
 
+export const php = () => {
+    return gulp
+    .src([
+        "src/php/**/*.php"
+    ])
+    .pipe(gulp.dest("docs/php"))
+    .pipe(browserSync.reload({
+        stream: true
+    }))
+}
+
+export const json = () => {
+    return gulp
+    .src([
+        "src/json/**/*.json"
+    ])
+    .pipe(gulp.dest("docs/json"))
+    .pipe(browserSync.reload({
+        stream: true
+    }))
+}
+
 export const files = () => {
     return gulp
     .src([
@@ -125,6 +147,8 @@ export const watch = () => {
     gulp.watch("src/*.*", gulp.parallel(files))
     gulp.watch("src/fonts/**/*.*", gulp.parallel(fonts))
     gulp.watch("src/img/**/*.*", gulp.parallel(images))
+    gulp.watch("src/php/**/*.php", gulp.parallel(php))
+    gulp.watch("src/json/**/*.json", gulp.parallel(json))
 }
 
 export default gulp.series(
@@ -137,6 +161,8 @@ export default gulp.series(
         files,
         fonts,
         images,
+        php,
+        json,
         browserSyncFunc
     )
 )

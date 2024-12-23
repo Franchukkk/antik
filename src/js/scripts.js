@@ -16,42 +16,52 @@ document.addEventListener('DOMContentLoaded', () => {
       'Other': 'Інше',
     }
     document.querySelector(".categories-main h1").innerHTML = categoriesUkr[selectedCategory]
-    const filteredProducts = products
-      .filter(product => product.category === selectedCategory)
-      // .sort((a, b) => (b.rating === 1) - (a.rating === 1));
-    
-    console.log(productsCategoryContainer);
-    filteredProducts.forEach(product => {
-      const productCard = `
-        <figure class="col-6 col-md-4 col-lg-3">
-          <figcaption>
-            <div class="figure-image">
-              <img src="${product.images[0]}" alt="${product.name}">
-              <a href="product-card.html" class="figure-to-card-page" data-product-id="${product.id}"></a>
-            </div>
-            <div class="card-text-block d-flex justify-content-between w-100">
-              <a href="product-card.html" class="description-card" data-product-id="${product.id}">
-                <p>${product.name}</p>
-                <p class="price">${product.price} грн.</p>
-              </a>
-              <a href="#" data-value="${product.id}" class="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "cart-open-btn" : ""} card-btn al-center d-flex justify-content-center">
-                <img src="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "img/tick.svg" : "img/cart.svg"}" alt="cart">
-              </a>
-            </div>
-          </figcaption>
-        </figure>
-      `;
+    fetch('../json/products.json')
+        .then(response => response.json())
+        .then(productsData => {
+            const products = productsData.map(product => {
+                const priceDifference = ((product.price - product.initiallPrice) / product.initiallPrice) * 100;
+                return { ...product, priceDifference };
+            }).sort((a, b) => b.priceDifference - a.priceDifference);
 
-      const cartOpenBtns = document.querySelectorAll('.cart-open-btn');
-      const basketPopup = document.querySelector('.basket-popup-js');
+            const filteredProducts = products
+              .filter(product => product.category === selectedCategory)
+              // .sort((a, b) => (b.rating === 1) - (a.rating === 1));
+            
+            console.log(productsCategoryContainer);
+            filteredProducts.forEach(product => {
+              const productCard = `
+                <figure class="col-6 col-md-4 col-lg-3">
+                  <figcaption>
+                    <div class="figure-image">
+                      <img src="${product.images[0]}" alt="${product.name}">
+                      <a href="product-card.html" class="figure-to-card-page" data-product-id="${product.id}"></a>
+                    </div>
+                    <div class="card-text-block d-flex justify-content-between w-100">
+                      <a href="product-card.html" class="description-card" data-product-id="${product.id}">
+                        <p>${product.name}</p>
+                        <p class="price">${product.price} грн.</p>
+                      </a>
+                      <a href="#" data-value="${product.id}" class="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "cart-open-btn" : ""} card-btn al-center d-flex justify-content-center">
+                        <img src="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "img/tick.svg" : "img/cart.svg"}" alt="cart">
+                      </a>
+                    </div>
+                  </figcaption>
+                </figure>
+              `;
+        
+              const cartOpenBtns = document.querySelectorAll('.cart-open-btn');
+              const basketPopup = document.querySelector('.basket-popup-js');
+        
+              // cartOpenBtns.forEach(btn => {
+              //     btn.addEventListener('click', () => {
+              //         basketPopup.classList.toggle('basket-active');
+              //     });
+              // });
+              productsCategoryContainer.insertAdjacentHTML('beforeend', productCard);
+            });
 
-      // cartOpenBtns.forEach(btn => {
-      //     btn.addEventListener('click', () => {
-      //         basketPopup.classList.toggle('basket-active');
-      //     });
-      // });
-      productsCategoryContainer.insertAdjacentHTML('beforeend', productCard);
-    });
+        });
   }
 
 })
@@ -208,7 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const succsessfulOrder = document.querySelector('.succsessful-order')
 
         checkOutOpenReadyPopup.addEventListener('click', (e) => {
-        
             const form = document.getElementById('checkOutForm')
             const inputs = form.querySelectorAll('input:not([name="userPromo"])')
             let isValid = true
@@ -222,118 +231,129 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isValid) {
                 return
             } else {
-                e.preventDefault()
-                document.querySelector('.check-out-popup-js').classList.toggle('basket-active');
+                e.preventDefault();
+console.log(2);
+document.querySelector('.check-out-popup-js').classList.toggle('basket-active');
+
+const formData = {
+    name: form.querySelector('input[name="userName"]').value,
+    phone: form.querySelector('#phoneInput').value,
+    promo: form.querySelector('input[type="text"][name="userPromo"]').value,
+    deliveryType: form.querySelector('input[name="deliveryType"]:checked').nextElementSibling.textContent,
+    city: form.querySelector('input[name="city"]').value,
+    department: form.querySelector('input[name="department"]').value
+};
+
+const basketProducts = JSON.parse(localStorage.getItem('basketProducts')) || [];
+
+// Перетворюємо функцію на асинхронну
+(async () => {
+    const productsResponse = await fetch('../json/products.json');
+    const productsData = await productsResponse.json();
+
+    const orderedProducts = basketProducts.map(id => {
+        const product = productsData.find(p => p.id === id);
+        if (!product) return null;
+        return {
+            name: product.name,
+            price: product.price,
+            photo: product.images[0]
+        };
+    }).filter(Boolean);
+
+    console.log(orderedProducts);
+
+    let totalPrice = orderedProducts.reduce((sum, product) => sum + product.price, 0);
+    let discountedPrice = totalPrice;
+
+    if (formData.promo) {
+        // Завантаження JSON через Fetch API (для браузера)
+        async function processOrder() {
+            try {
+                const response = await fetch('../json/promocodes.json');
+                const promos = await response.json();
+                const foundPromo = promos.find(p => p.promo === formData.promo);
         
-                const formData = {
-                    name: form.querySelector('input[name="userName"]').value,
-                    phone: form.querySelector('#phoneInput').value,
-                    promo: form.querySelector('input[type="text"][name="userPromo"]').value,
-                    deliveryType: form.querySelector('input[name="deliveryType"]:checked').nextElementSibling.textContent,
-                    city: form.querySelector('input[name="city"]').value,
-                    department: form.querySelector('input[name="department"]').value
+                if (foundPromo) {
+                    discountedPrice = totalPrice - (totalPrice * foundPromo.discount / 100);
                 }
-
-                const basketProducts = JSON.parse(localStorage.getItem('basketProducts')) || [];
-                const orderedProducts = basketProducts.map(id => {
-                    const product = products.find(p => p.id === id);
-                    return {
-                        name: product.name,
-                        price: product.price,
-                        photo: product.images[0]
-                    };
-                });
-
-                let totalPrice = orderedProducts.reduce((sum, product) => sum + product.price, 0);
-                let discountedPrice = totalPrice;
-            
-                if (formData.promo) {
-                    const foundPromo = promos.find(p => p.promo === formData.promo);
-                    if (foundPromo) {
-                        discountedPrice = totalPrice - (totalPrice * foundPromo.discount / 100);
-                    }
-                }
-
-                const productsMessage = orderedProducts.map(product => 
+        
+                const productsMessage = orderedProducts.map(product =>
                     `${product.name} - ${product.price} грн`
                 ).join('\n');
-
-                const imgUrl = orderedProducts.map(product => 
-                  `${product.photo}`
-              )
-
-              console.log(imgUrl);
-              
-
-
+        
+                const imgUrl = orderedProducts.map(product => product.photo);
+        
+                console.log(imgUrl);
+        
                 const message = `
-    <b>Нове замовлення!</b>
-    <b>Ім'я:</b> ${formData.name}
-    <b>Телефон:</b> ${formData.phone}
-    <b>Промокод:</b> ${formData.promo || 'Не вказано'}
-    <b>Спосіб доставки:</b> ${formData.deliveryType}
-    <b>Місто:</b> ${formData.city}
-    <b>Відділення:</b> ${formData.department}
-    
-
-
-    <b>Замовлені товари:</b>
-    
-    ${productsMessage}
-
-    <b>Загальна сума без знижки:</b> ${totalPrice} грн
-    <b>Загальна сума до сплати:</b> ${discountedPrice} <i>грн ${formData.promo ? '(з урахуванням промокоду)' : ''}</i>
-    `;
-
+<b>Нове замовлення!</b>
+<b>Ім'я:</b> ${formData.name}
+<b>Телефон:</b> ${formData.phone}
+<b>Промокод:</b> ${formData.promo || 'Не вказано'}
+<b>Спосіб доставки:</b> ${formData.deliveryType}
+<b>Місто:</b> ${formData.city}
+<b>Відділення:</b> ${formData.department}
+<b>Замовлені товари:</b>
+${productsMessage}
+<b>Загальна сума без знижки:</b> ${totalPrice} грн
+<b>Загальна сума до сплати:</b> ${discountedPrice} <i>грн ${formData.promo ? '(з урахуванням промокоду)' : ''}</i>
+                `;
+        
                 const BOT_TOKEN = '7936445587:AAHV5lZ4RV6fW2w5vE75qfMRg27VUtuDDo0';
                 const CHAT_ID = '-1002442277202';
-                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                      chat_id: CHAT_ID,
-                      text: message,
-                      parse_mode: 'HTML'
-                  })
-              });
-                
-
-                setTimeout(function() {
-                  imgUrl.forEach(function (url) {
-                    let imageUrl = 'https://raw.githubusercontent.com/Franchukkk/antik/refs/heads/master/docs/' +  url;
-  
-  
-                    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-                      method: 'POST',
-                      headers: {
+        
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
                         'Content-Type': 'application/json',
-                      },
-                      body: JSON.stringify({
+                    },
+                    body: JSON.stringify({
                         chat_id: CHAT_ID,
-                        photo: imageUrl,
-                      })
+                        text: message,
+                        parse_mode: 'HTML'
                     })
-                    .then(response => response.json())
-                    
-                    .catch(error => {
-                      console.error('Помилка:', error);
-  
+                });
+        
+                setTimeout(() => {
+                    imgUrl.forEach(async url => {
+                        console.log(url);
+                        const imageUrl = 'https://raw.githubusercontent.com/Franchukkk/antik/refs/heads/master/docs/' + url;
+        
+                        try {
+                            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    chat_id: CHAT_ID,
+                                    photo: imageUrl,
+                                })
+                            });
+                        } catch (error) {
+                            console.error('Помилка:', error);
+                        }
                     });
-                  })
-                }, 1000)
-
-                
-
-
-                
-                
-
-
+                }, 1000);
+        
                 succsessfulOrder.classList.toggle('d-none');
-
                 localStorage.clear();
+            } catch (error) {
+                console.error('Error loading the JSON file:', error);
+            }
+        
+            console.log(discountedPrice);
+        }
+        
+        processOrder();
+        
+
+    }
+
+    
+})();
+
 
             }
         })
@@ -357,14 +377,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const productsByCategory = {};
-    products.forEach(product => {
-        if (!productsByCategory[product.category]) {
-            productsByCategory[product.category] = [];
-        }
-        if (productsByCategory[product.category].length < 2) {
-            productsByCategory[product.category].push(product);
-        }
-    });
+    fetch('../json/products.json')
+        .then(response => response.json())
+        .then(productsData => {
+            const products = productsData.map(product => {
+                const priceDifference = ((product.price - product.initiallPrice) / product.initiallPrice) * 100;
+                return { ...product, priceDifference };
+            }).sort((a, b) => b.priceDifference - a.priceDifference);
+
+            products.forEach(product => {
+                if (!productsByCategory[product.category]) {
+                    productsByCategory[product.category] = [];
+                }
+                if (productsByCategory[product.category].length < 2) {
+                    productsByCategory[product.category].push(product);
+                }
+            });
+
+        });
 
 
 
@@ -375,50 +405,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function updateProducts () {
-      const sortedProducts = [];
+        fetch('../json/products.json')
+            .then(response => response.json())
+            .then(productsData => {
+                const products = productsData.map(product => {
+                    const priceDifference = ((product.price - product.initiallPrice) / product.initiallPrice) * 100;
+                    return { ...product, priceDifference };
+                }).sort((a, b) => b.priceDifference - a.priceDifference);
 
-      
-      // First add products with rating 1
-      Object.values(productsByCategory).flat().forEach(product => {
-        sortedProducts.push(product);
-      });
-      
-      // Then add remaining products
-      // Object.values(productsByCategory).flat().forEach(product => {
-      //     if (product.rating !== 1) {
-      //         sortedProducts.push(product);
-      //     }
-      // });
-      
-      sortedProducts.forEach(product => {
-          const productCard = `
-              <figure class="col-6 col-md-4 col-lg-3">
-                  <figcaption>
-                      <div class="figure-image">
-                          <img src="${product.images[0]}" alt="${product.name}">
-                          <a href="product-card.html" class="figure-to-card-page" data-product-id="${product.id}"></a>
-                      </div>
-                      <div class="card-text-block d-flex justify-content-between w-100">
-                          <a href="product-card.html" class="description-card" data-product-id="${product.id}">
-                              <p>${product.name}</p>
-                              <p class="price">${product.price} грн.</p>
-                          </a>
-                          <a href="#" data-value="${product.id}" class="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "cart-open-btn" : ""} card-btn al-center d-flex justify-content-center">
-                              <img src="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "img/tick.svg" : "img/cart.svg"}" alt="cart">
-                          </a>
-                      </div>
-                  </figcaption>
-              </figure>
-          `;
+                // products.forEach(product => {
+                //     if (!productsByCategory[product.category]) {
+                //         productsByCategory[product.category] = [];
+                //     }
+                //     if (productsByCategory[product.category].length < 2) {
+                //         productsByCategory[product.category].push(product);
+                //     }
+                // });
+                // const sortedProducts = [];
+          
+                
+                // // First add products with rating 1
+                // Object.values(productsByCategory).flat().forEach(product => {
+                //   sortedProducts.push(product);
+                // });
+                
+                // console.log(sortedProducts);
+          
+          
+                
+                // Then add remaining products
+                // Object.values(productsByCategory).flat().forEach(product => {
+                //     if (product.rating !== 1) {
+                //         sortedProducts.push(product);
+                //     }
+                // });
 
-          const cartOpenBtns = document.querySelectorAll('.cart-open-btn');
-          const basketPopup = document.querySelector('.basket-popup-js');
+                const sortedProducts = products.slice(0, 12);
+                
+                sortedProducts.forEach(product => {
+                    const productCard = `
+                        <figure class="col-6 col-md-4 col-lg-3">
+                            <figcaption>
+                                <div class="figure-image">
+                                    <img src="${product.images[0]}" alt="${product.name}">
+                                    <a href="product-card.html" class="figure-to-card-page" data-product-id="${product.id}"></a>
+                                </div>
+                                <div class="card-text-block d-flex justify-content-between w-100">
+                                    <a href="product-card.html" class="description-card" data-product-id="${product.id}">
+                                        <p>${product.name}</p>
+                                        <p class="price">${product.price} грн.</p>
+                                    </a>
+                                    <a href="#" data-value="${product.id}" class="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "cart-open-btn" : ""} card-btn al-center d-flex justify-content-center">
+                                        <img src="${JSON.parse(localStorage.getItem('basketProducts') || '[]').includes(product.id) ? "img/tick.svg" : "img/cart.svg"}" alt="cart">
+                                    </a>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    `;
+          
+                    const cartOpenBtns = document.querySelectorAll('.cart-open-btn');
+                    const basketPopup = document.querySelector('.basket-popup-js');
+          
+          
+                    if (productsContainer) {
+                      productsContainer.insertAdjacentHTML('beforeend', productCard);
+                    }
+                });
 
-
-          if (productsContainer) {
-            productsContainer.insertAdjacentHTML('beforeend', productCard);
-          }
-      });
+            });
 
     }
 
@@ -463,7 +517,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let basketProducts = JSON.parse(localStorage.getItem('basketProducts')) || [];
         basketProducts = basketProducts.filter(id => id !== productId);
         localStorage.setItem('basketProducts', JSON.stringify(basketProducts));
-        updateBasket();
+        setTimeout(() => {
+
+            updateBasket();
+        }, 100);
     }
 
 
@@ -536,36 +593,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let totalPrice = 0;
         basketProducts.forEach(productId => {
-            const product = products.find(p => p.id === productId);
-            if (product) {
-                totalPrice += product.price;
-                const basketCard = `
-                    <div class="col-6 col-md-4 col-lg-3">
-                        <figure class="figure-basket">
-                            <figcaption>
-                                <div class="figure-image">
-                                    <img src="${product.images[0]}" alt="${product.name}">
-                                    <a href="product-card.html" class="figure-to-card-page" data-product-id="${product.id}"></a>
-                                </div>
-                                <div class="card-text-block d-flex justify-content-between w-100">
-                                    <a href="product-card.html" class="description-card" data-product-id="${product.id}">
-                                        <p>${product.name}</p>
-                                        <p class="price">${product.price} грн.</p>
-                                    </a>
-                                    <a href="#" onclick="removeFromBasket(${product.id})" class="card-btn al-center d-flex justify-content-center align-items-center">
-                                        <img src="img/cross.svg" alt="remove">
-                                    </a>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                `;
-                basketContainer.insertAdjacentHTML('beforeend', basketCard);
-            }
+            fetch('../json/products.json')
+                .then(response => response.json())
+                .then(productsData => {
+                    const products = productsData.map(product => {
+                        const priceDifference = ((product.price - product.initiallPrice) / product.initiallPrice) * 100;
+                        return { ...product, priceDifference };
+                    }).sort((a, b) => b.priceDifference - a.priceDifference);
+
+                    const product = products.find(p => p.id === productId);
+                    if (product) {
+                        
+                        totalPrice += product.price;
+
+                        const basketCard = `
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <figure class="figure-basket">
+                                    <figcaption>
+                                        <div class="figure-image">
+                                            <img src="${product.images[0]}" alt="${product.name}">
+                                            <a href="product-card.html" class="figure-to-card-page" data-product-id="${product.id}"></a>
+                                        </div>
+                                        <div class="card-text-block d-flex justify-content-between w-100">
+                                            <a href="product-card.html" class="description-card" data-product-id="${product.id}">
+                                                <p>${product.name}</p>
+                                                <p class="price">${product.price} грн.</p>
+                                            </a>
+                                            <a href="#" onclick="removeFromBasket(${product.id})" class="card-btn al-center d-flex justify-content-center align-items-center">
+                                                <img src="img/cross.svg" alt="remove">
+                                            </a>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        `;
+                        basketContainer.insertAdjacentHTML('beforeend', basketCard);
+                    }
+
+                    
+                    
+                    totalPriceContainer.textContent = `${totalPrice != 0 ? totalPrice + "грн." : 'Кошик пустий'}`;
+                    document.querySelector("#allPriceWithPromo").textContent = `${totalPrice != 0 ? totalPrice + "грн." : 'Кошик пустий'}`;
+                    checkoutBtn.disabled = false;
+                });
         });
-        totalPriceContainer.textContent = `${totalPrice != 0 ? totalPrice + "грн." : 'Кошик пустий'}`;
-        document.querySelector("#allPriceWithPromo").textContent = `${totalPrice != 0 ? totalPrice + "грн." : 'Кошик пустий'}`;
-        checkoutBtn.disabled = false;
     }
 
 
@@ -606,11 +677,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         if (e.target.closest('a[href="product-card.html"]')) {
-            const productId = parseInt(e.target.closest('a').dataset.productId);
-            const product = products.find(p => p.id === productId);
-            if (product) {
-                localStorage.setItem('selectedProduct', JSON.stringify(product));
-            }
+            fetch('../json/products.json')
+                .then(response => response.json())
+                .then(productsData => {
+                    const products = productsData.map(product => {
+                        const priceDifference = ((product.price - product.initiallPrice) / product.initiallPrice) * 100;
+                        return { ...product, priceDifference };
+                    }).sort((a, b) => b.priceDifference - a.priceDifference);
+
+
+                    const productId = parseInt(e.target.closest('a').dataset.productId);
+                    const product = products.find(p => p.id === productId);
+                    if (product) {
+                        localStorage.setItem('selectedProduct', JSON.stringify(product));
+                    }
+                });
         }
     });
 
@@ -623,39 +704,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-//   const promos = [
-//   {
-//         promo: "123456",
-//         discount: 10
-//     },
-//     {
-//         promo: "654321",
-//         discount: 20
-//     },
-//     {
-//         promo: "987654",
-//         discount: 30
-//     }
-// ];
 const promoInput = document.querySelector('input[name="userPromo"]');
+console.log(promoInput);
 
 
   promoInput.addEventListener('input', (e) => {
-      const enteredPromo = e.target.value;
-      const foundPromo = promos.find(p => p.promo === enteredPromo);
-      const priceElement = document.querySelector('#allPriceWithPromo');
-      const currentPrice = parseInt(priceElement.textContent);
-    
-      if (foundPromo && currentPrice) {
-          const discountAmount = currentPrice * (foundPromo.discount / 100);
-          const newPrice = currentPrice - discountAmount;
-          priceElement.textContent = `${Math.round(newPrice)}грн.`;
-          document.querySelector("#isPromoUsed").textContent = "Промокод (застосовано)"
-          localStorage.setItem('promo', enteredPromo);
-      } else {
-          priceElement.textContent = document.querySelector('#totalPrice').textContent;
-          document.querySelector("#isPromoUsed").textContent = "Промокод"
-      }
+    // Завантаження JSON через Fetch API (для браузера)
+
+    fetch('../json/promocodes.json')
+        .then(response => response.json())
+        .then(promos => {
+            // Тепер змінна promos містить ваш масив
+            console.log(promos);
+            const enteredPromo = e.target.value;
+            const foundPromo = promos.find(p => p.promo === enteredPromo);
+            const priceElement = document.querySelector('#allPriceWithPromo');
+            const currentPrice = parseInt(priceElement.textContent);
+        
+            if (foundPromo && currentPrice) {
+                const discountAmount = currentPrice * (foundPromo.discount / 100);
+                const newPrice = currentPrice - discountAmount;
+                priceElement.textContent = `${Math.round(newPrice)}грн.`;
+                document.querySelector("#isPromoUsed").textContent = "Промокод (застосовано)"
+                localStorage.setItem('promo', enteredPromo);
+            } else {
+                priceElement.textContent = document.querySelector('#totalPrice').textContent;
+                document.querySelector("#isPromoUsed").textContent = "Промокод"
+            }
+        })
+    .catch(error => console.error('Error loading the JSON file:', error));
+
   });
 
 
