@@ -2,6 +2,12 @@ if (JSON.parse(localStorage.getItem('basketProducts') || '[]').length > 0) {
   document.querySelector(".triangle").style.transform = "scale(1)";
 }
 
+if (document.querySelector(".header-underline")) {
+    if (localStorage.getItem('selectedProduct')) {
+        localStorage.removeItem('selectedProduct')
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const selectedCategory = localStorage.getItem('selectedCategory');
   const productsCategoryContainer = document.querySelector('#productsCategory');
@@ -266,27 +272,27 @@ const basketProducts = JSON.parse(localStorage.getItem('basketProducts')) || [];
     let totalPrice = orderedProducts.reduce((sum, product) => sum + product.price, 0);
     let discountedPrice = totalPrice;
 
-    if (formData.promo) {
-        // Завантаження JSON через Fetch API (для браузера)
-        async function processOrder() {
-            try {
-                const response = await fetch('../json/promocodes.json');
-                const promos = await response.json();
-                const foundPromo = promos.find(p => p.promo === formData.promo);
-        
-                if (foundPromo) {
-                    discountedPrice = totalPrice - (totalPrice * foundPromo.discount / 100);
-                }
-        
-                const productsMessage = orderedProducts.map(product =>
-                    `${product.name} - ${product.price} грн`
-                ).join('\n');
-        
-                const imgUrl = orderedProducts.map(product => product.photo);
-        
-                console.log(imgUrl);
-        
-                const message = `
+
+    // Завантаження JSON через Fetch API (для браузера)
+    async function processOrder() {
+        try {
+            const response = await fetch('../json/promocodes.json');
+            const promos = await response.json();
+            const foundPromo = promos.find(p => p.promo === formData.promo);
+    
+            if (foundPromo) {
+                discountedPrice = totalPrice - (totalPrice * foundPromo.discount / 100);
+            }
+    
+            const productsMessage = orderedProducts.map(product =>
+                `${product.name} - ${product.price} грн`
+            ).join('\n');
+    
+            const imgUrl = orderedProducts.map(product => product.photo);
+    
+            console.log(imgUrl);
+    
+            const message = `
 <b>Нове замовлення!</b>
 <b>Ім'я:</b> ${formData.name}
 <b>Телефон:</b> ${formData.phone}
@@ -298,58 +304,58 @@ const basketProducts = JSON.parse(localStorage.getItem('basketProducts')) || [];
 ${productsMessage}
 <b>Загальна сума без знижки:</b> ${totalPrice} грн
 <b>Загальна сума до сплати:</b> ${discountedPrice} <i>грн ${formData.promo ? '(з урахуванням промокоду)' : ''}</i>
-                `;
-        
-                const BOT_TOKEN = '7936445587:AAHV5lZ4RV6fW2w5vE75qfMRg27VUtuDDo0';
-                const CHAT_ID = '-1002442277202';
-        
-                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: message,
-                        parse_mode: 'HTML'
-                    })
+            `;
+    
+            const BOT_TOKEN = '7936445587:AAHV5lZ4RV6fW2w5vE75qfMRg27VUtuDDo0';
+            const CHAT_ID = '-1002442277202';
+    
+            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            });
+    
+            setTimeout(() => {
+                imgUrl.forEach(async url => {
+                    console.log(url);
+                    const imageUrl = 'https://raw.githubusercontent.com/Franchukkk/antik/refs/heads/master/docs/' + url;
+    
+                    try {
+                        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                chat_id: CHAT_ID,
+                                photo: imageUrl,
+                            })
+                        });
+                    } catch (error) {
+                        console.error('Помилка:', error);
+                    }
                 });
-        
-                setTimeout(() => {
-                    imgUrl.forEach(async url => {
-                        console.log(url);
-                        const imageUrl = 'https://raw.githubusercontent.com/Franchukkk/antik/refs/heads/master/docs/' + url;
-        
-                        try {
-                            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                    chat_id: CHAT_ID,
-                                    photo: imageUrl,
-                                })
-                            });
-                        } catch (error) {
-                            console.error('Помилка:', error);
-                        }
-                    });
-                }, 1000);
-        
-                succsessfulOrder.classList.toggle('d-none');
-                localStorage.clear();
-            } catch (error) {
-                console.error('Error loading the JSON file:', error);
-            }
-        
-            console.log(discountedPrice);
+            }, 1000);
+    
+            succsessfulOrder.classList.toggle('d-none');
+            localStorage.clear();
+        } catch (error) {
+            console.error('Error loading the JSON file:', error);
         }
-        
-        processOrder();
-        
-
+    
+        console.log(discountedPrice);
     }
+    
+    processOrder();
+    
+
+
 
     
 })();

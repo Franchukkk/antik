@@ -1,4 +1,44 @@
 <?php
+session_start();
+$filename = '../json/products.json';
+$promoFilename = '../json/promocodes.json';
+$uploadDir = '../img/'; // Директорія для збереження зображень
+
+// Перевірка пароля
+if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
+        if ($_POST['password'] === '9912') {
+            $_SESSION['authenticated'] = true;
+        } else {
+            $error = "Неправильний пароль. Спробуйте ще раз.";
+        }
+    }
+
+    if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
+        ?>
+        <!DOCTYPE html>
+        <html lang="uk">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Введіть пароль</title>
+        </head>
+        <body>
+        <h1>Доступ до сторінки</h1>
+        <form method="POST">
+            <label>
+                Введіть пароль:<br>
+                <input type="password" name="password" required>
+            </label><br><br>
+            <button type="submit">Увійти</button>
+        </form>
+        <?php if (isset($error)) { echo "<p style='color: red;'>$error</p>"; } ?>
+        </body>
+        </html>
+        <?php
+        exit;
+    }
+}
 // Назва файлу для збереження даних
 $filename = '../json/products.json';
 $promoFilename = '../json/promocodes.json';

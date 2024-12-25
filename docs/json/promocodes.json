@@ -1,6 +1,18 @@
 [
     {
+        "promo": "asdads",
+        "discount": 12
+    },
+    {
+        "promo": "sddsa",
+        "discount": 2
+    },
+    {
+        "promo": "sddsa",
+        "discount": 2
+    },
+    {
         "promo": "qwerty",
-        "discount": 22
+        "discount": 55
     }
 ]
